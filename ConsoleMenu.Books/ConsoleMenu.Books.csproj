@@ -38,13 +38,24 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ShowBooksCommand.cs" />
+    <Compile Include="Entities\Book.cs" />
+    <Compile Include="Helpers\XmlSerializerHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConsoleMenu.Core\ConsoleMenu.Core.csproj">
+      <Project>{79D512EF-18AD-4CF6-955E-E07510BA7612}</Project>
+      <Name>ConsoleMenu.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

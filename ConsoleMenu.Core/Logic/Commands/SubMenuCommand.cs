@@ -1,12 +1,10 @@
-﻿using ConsoleMenu.Core.Logic.Menus;
-
-namespace ConsoleMenu.Core.Logic.Commands {
+﻿namespace ConsoleMenu.Core.Logic.Commands {
 	public class SubMenuCommand<TValue> : ICommand<TValue> {
-		public string Description => subMenu.MenuDescription;
+		public string Description => subMenu.Description;
 
-		private readonly SubMenu<TValue> subMenu;
+		private readonly ISubMenu subMenu;
 
-		public SubMenuCommand(SubMenu<TValue> subMenu) {
+		public SubMenuCommand(ISubMenu subMenu) {
 			this.subMenu = subMenu;
 		}
 

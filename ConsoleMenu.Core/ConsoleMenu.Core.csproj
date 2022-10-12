@@ -41,10 +41,15 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Helpers\ConsoleReadHelper.cs" />
     <Compile Include="Logic\Commands\SubMenuCommand.cs" />
-    <Compile Include="Logic\Menu.cs" />
+    <Compile Include="Logic\IMenu.cs" />
+    <Compile Include="Logic\ISubMenu.cs" />
+    <Compile Include="Logic\Menus\BaseMenu.cs" />
     <Compile Include="Logic\ICommand.cs" />
-    <Compile Include="Logic\Menus\MainMenu.cs" />
-    <Compile Include="Logic\Menus\SubMenu.cs" />
+    <Compile Include="Logic\Menus\DynamicMenu.cs" />
+    <Compile Include="Logic\Menus\Dynamic\DynamicSubMenu.cs" />
+    <Compile Include="Logic\Menus\Static\StaticMainMenu.cs" />
+    <Compile Include="Logic\Menus\StaticMenu.cs" />
+    <Compile Include="Logic\Menus\Static\StaticSubMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Logic\ValueWrapper.cs" />
   </ItemGroup>
