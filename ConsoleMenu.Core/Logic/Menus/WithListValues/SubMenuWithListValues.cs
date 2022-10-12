@@ -7,8 +7,8 @@ namespace ConsoleMenu.Core.Logic.Menus.WithListValues {
 
 		public string Description { get; }
 
-		public SubMenuWithListValues(string description, ICommand<TValue> command, Func<TValue, string> getValueDescription) : base(command, getValueDescription) {
-			Description = description;
+		public SubMenuWithListValues(ICommand<TValue> command, Func<TValue, string> getValueDescription) : base(command, getValueDescription) {
+			Description = command.Description;
 		}
 
 		protected override void PrintCommands(IList<TValue> values) {

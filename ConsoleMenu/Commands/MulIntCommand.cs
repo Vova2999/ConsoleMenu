@@ -5,7 +5,11 @@ using ConsoleMenu.Core.Logic;
 
 namespace ConsoleMenu.Commands {
 	public class MulIntCommand : ICommand<ValueWrapper<int>> {
-		public string Description => "Умножить";
+		public string Description { get; }
+
+		public MulIntCommand(string description) {
+			Description = description;
+		}
 
 		public void Execute(ValueWrapper<int> wrapper) {
 			Console.Write("Введите число для умножения");

@@ -5,7 +5,11 @@ using ConsoleMenu.Core.Logic;
 
 namespace ConsoleMenu.Commands {
 	public class SubIntCommand : ICommand<ValueWrapper<int>> {
-		public string Description => "Вычесть";
+		public string Description { get; }
+
+		public SubIntCommand(string description) {
+			Description = description;
+		}
 
 		public void Execute(ValueWrapper<int> wrapper) {
 			Console.Write("Введите число для вычитания");

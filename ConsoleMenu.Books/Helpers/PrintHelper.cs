@@ -15,7 +15,7 @@ namespace ConsoleMenu.Books.Helpers {
 				if (index != 0 && index % pauseEveryPages == 0) {
 					Console.WriteLine();
 					Console.WriteLine("1: Продолжить");
-					Console.WriteLine("0: Отмена");
+					Console.WriteLine("0: Прервать");
 
 					var selector = ConsoleReadHelper.ReadInt(" => ", 0, 1);
 					if (selector == 0)

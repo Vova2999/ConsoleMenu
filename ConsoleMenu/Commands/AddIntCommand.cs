@@ -5,7 +5,11 @@ using ConsoleMenu.Core.Logic;
 
 namespace ConsoleMenu.Commands {
 	public class AddIntCommand : ICommand<ValueWrapper<int>> {
-		public string Description => "Добавить";
+		public string Description { get; }
+
+		public AddIntCommand(string description) {
+			Description = description;
+		}
 
 		public void Execute(ValueWrapper<int> wrapper) {
 			Console.Write("Введите число для сложения");

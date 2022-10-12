@@ -3,11 +3,12 @@ using ConsoleMenu.Core.Logic;
 
 namespace ConsoleMenu.Commands {
 	public class CleanCommand<TValue> : ICommand<ValueWrapper<TValue>> {
-		public string Description => "Очистить";
+		public string Description { get; }
 
 		private readonly TValue cleanValue;
 
-		public CleanCommand(TValue cleanValue = default) {
+		public CleanCommand(string description, TValue cleanValue = default) {
+			Description = description;
 			this.cleanValue = cleanValue;
 		}
 

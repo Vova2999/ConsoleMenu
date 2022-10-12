@@ -4,7 +4,7 @@ using ConsoleMenu.Core.Logic.Menus.WithListValues;
 
 namespace ConsoleMenu.Books.Menus {
 	public class BookTitleSubMenuWithListValues : SubMenuWithListValues<Book> {
-		public BookTitleSubMenuWithListValues(string description, ICommand<Book> command) : base(description, command, book => book.Title) {
+		public BookTitleSubMenuWithListValues(ICommand<Book> command) : base(command, book => book.Title) {
 		}
 	}
 }

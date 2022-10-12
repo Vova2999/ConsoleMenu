@@ -11,7 +11,6 @@ using ConsoleMenu.Core;
 using ConsoleMenu.Core.Logic;
 using ConsoleMenu.Core.Logic.Commands;
 using ConsoleMenu.Core.Logic.Menus.WithCommands;
-using ConsoleMenu.Core.Logic.Menus.WithListValues;
 
 namespace ConsoleMenu.Books {
 	public static class Program {
@@ -55,28 +54,39 @@ namespace ConsoleMenu.Books {
 		private static IMenu<ValueWrapper<IList<Book>>> CreateMenu() {
 			return new MainMenuWithCommands<ValueWrapper<IList<Book>>>(
 				new ShowBooksCommand("Показать список книг"),
-				new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(new BookTitleSubMenuWithListValues("Показать книгу",
+				new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(
+					new BookTitleSubMenuWithListValues(
 						new ShowBookCommand("Показать книгу")),
 					wrapper => wrapper.Value),
 				new AddBookCommand("Добавить книгу"),
 				new DeleteBookCommand("Удалить книгу"),
-				new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(new BookTitleSubMenuWithListValues("Редактировать книгу",
-						new SubMenuCommand<Book>(new SubMenuWithCommands<Book>("Редактировать книгу",
-							new EditBookTitleCommand("Редактировать название"),
-							new EditBookAuthorCommand("Редактировать автора"),
-							new SubMenuCommand<Book>(new SubMenuWithCommands<Book>("Редактировать страницы",
-								new AddBookPageCommand("Добавить страницу"),
-								new EditBookPageCommand("Редактировать страницу"),
-								new DeleteBookPageCommand("Удалить страницу")))))),
+				new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(
+					new BookTitleSubMenuWithListValues(
+						new SubMenuCommand<Book>(
+							new SubMenuWithCommands<Book>("Редактировать книгу",
+								new EditBookTitleCommand("Редактировать название"),
+								new EditBookAuthorCommand("Редактировать автора"),
+								new SubMenuCommand<Book>(
+									new SubMenuWithCommands<Book>("Редактировать страницы",
+										new AddBookPageCommand("Добавить страницу"),
+										new EditBookPageCommand("Редактировать страницу"),
+										new DeleteBookPageCommand("Удалить страницу")))))),
 					wrapper => wrapper.Value),
-				new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(new SubMenuWithCommands<IList<Book>>("Редактировать книгу 2",
-						new SubMenuCommand<IList<Book>>(new BookTitleSubMenuWithListValues("Редактировать название", new EditBookTitleCommand("Редактировать название"))),
-						new SubMenuCommand<IList<Book>>(new BookTitleSubMenuWithListValues("Редактировать автора", new EditBookAuthorCommand("Редактировать автора"))),
-						new SubMenuCommand<IList<Book>>(new BookTitleSubMenuWithListValues("Редактировать страницы",
-							new SubMenuCommand<Book>(new SubMenuWithCommands<Book>("Редактировать страницы",
-								new AddBookPageCommand("Добавить страницу"),
-								new EditBookPageCommand("Редактировать страницу"),
-								new DeleteBookPageCommand("Удалить страницу")))))),
+				new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(
+					new SubMenuWithCommands<IList<Book>>("Редактировать книгу 2",
+						new SubMenuCommand<IList<Book>>(
+							new BookTitleSubMenuWithListValues(
+								new EditBookTitleCommand("Редактировать название"))),
+						new SubMenuCommand<IList<Book>>(
+							new BookTitleSubMenuWithListValues(
+								new EditBookAuthorCommand("Редактировать автора"))),
+						new SubMenuCommand<IList<Book>>(
+							new BookTitleSubMenuWithListValues(
+								new SubMenuCommand<Book>(
+									new SubMenuWithCommands<Book>("Редактировать страницы",
+										new AddBookPageCommand("Добавить страницу"),
+										new EditBookPageCommand("Редактировать страницу"),
+										new DeleteBookPageCommand("Удалить страницу")))))),
 					wrapper => wrapper.Value));
 		}
 	}
