@@ -41,9 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AddBookCommand.cs" />
+    <Compile Include="Commands\DeleteBookCommand.cs" />
+    <Compile Include="Commands\EditBookPages\DeleteBookPageCommand.cs" />
+    <Compile Include="Commands\EditBookPages\EditBookPageCommand.cs" />
+    <Compile Include="Commands\EditBookProperties\EditBookAuthorCommand.cs" />
+    <Compile Include="Commands\EditBookPages\AddBookPageCommand.cs" />
+    <Compile Include="Commands\EditBookProperties\EditBookTitleCommand.cs" />
+    <Compile Include="Commands\ShowBookCommand.cs" />
     <Compile Include="Commands\ShowBooksCommand.cs" />
     <Compile Include="Entities\Book.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Helpers\PrintHelper.cs" />
     <Compile Include="Helpers\XmlSerializerHelper.cs" />
+    <Compile Include="Menus\BookTitleSubMenuWithListValues.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

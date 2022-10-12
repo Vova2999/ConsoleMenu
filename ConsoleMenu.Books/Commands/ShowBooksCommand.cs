@@ -1,15 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ConsoleMenu.Books.Entities;
+using ConsoleMenu.Books.Helpers;
+using ConsoleMenu.Core;
 using ConsoleMenu.Core.Logic;
 
 namespace ConsoleMenu.Books.Commands {
-	public class ShowBooksCommand : ICommand<IList<Book>> {
-		public string Description => "Показать книги";
+	public class ShowBooksCommand : ICommand<ValueWrapper<IList<Book>>> {
+		public string Description { get; }
+
+		public ShowBooksCommand(string description) {
+			Description = description;
+		}
 
 		public void Execute(ValueWrapper<IList<Book>> wrapper) {
-			foreach (var book in wrapper.Value)
-				Console.WriteLine($"Title: {book.Title}, Author: {book.Author}, PagesCount: {book.PagesCount}");
+			PrintHelper.PrintWithPause(wrapper.Value.Select((book, i) => $"{Environment.NewLine}Книга #{i + 1}{Environment.NewLine}Название: {book.Title}, Автор: {book.Author}, Количество страниц: {book.Pages.Count}"), 10);
+
+			PrintHelper.ReadKeyForContinue();
 		}
 	}
 }

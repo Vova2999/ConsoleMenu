@@ -1,9 +1,10 @@
 ﻿using System;
+using ConsoleMenu.Core;
 using ConsoleMenu.Core.Helpers;
 using ConsoleMenu.Core.Logic;
 
 namespace ConsoleMenu.Commands {
-	public class AddIntCommand : ICommand<int> {
+	public class AddIntCommand : ICommand<ValueWrapper<int>> {
 		public string Description => "Добавить";
 
 		public void Execute(ValueWrapper<int> wrapper) {

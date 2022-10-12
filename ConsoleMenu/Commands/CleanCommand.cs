@@ -1,7 +1,8 @@
-﻿using ConsoleMenu.Core.Logic;
+﻿using ConsoleMenu.Core;
+using ConsoleMenu.Core.Logic;
 
 namespace ConsoleMenu.Commands {
-	public class CleanCommand<TValue> : ICommand<TValue> {
+	public class CleanCommand<TValue> : ICommand<ValueWrapper<TValue>> {
 		public string Description => "Очистить";
 
 		private readonly TValue cleanValue;

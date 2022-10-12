@@ -1,9 +1,10 @@
 ﻿using System;
+using ConsoleMenu.Core;
 using ConsoleMenu.Core.Helpers;
 using ConsoleMenu.Core.Logic;
 
 namespace ConsoleMenu.Commands {
-	public class MulIntCommand : ICommand<int> {
+	public class MulIntCommand : ICommand<ValueWrapper<int>> {
 		public string Description => "Умножить";
 
 		public void Execute(ValueWrapper<int> wrapper) {

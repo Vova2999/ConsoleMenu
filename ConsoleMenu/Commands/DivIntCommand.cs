@@ -1,9 +1,10 @@
 ﻿using System;
+using ConsoleMenu.Core;
 using ConsoleMenu.Core.Helpers;
 using ConsoleMenu.Core.Logic;
 
 namespace ConsoleMenu.Commands {
-	public class DivIntCommand : ICommand<int> {
+	public class DivIntCommand : ICommand<ValueWrapper<int>> {
 		public string Description => "Разделить";
 
 		public void Execute(ValueWrapper<int> wrapper) {

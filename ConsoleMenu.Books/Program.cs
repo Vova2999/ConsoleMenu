@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.IO;
 using ConsoleMenu.Books.Commands;
+using ConsoleMenu.Books.Commands.EditBookPages;
+using ConsoleMenu.Books.Commands.EditBookProperties;
 using ConsoleMenu.Books.Entities;
 using ConsoleMenu.Books.Helpers;
+using ConsoleMenu.Books.Menus;
+using ConsoleMenu.Core;
 using ConsoleMenu.Core.Logic;
-using ConsoleMenu.Core.Logic.Menus;
-using ConsoleMenu.Core.Logic.Menus.Static;
+using ConsoleMenu.Core.Logic.Commands;
+using ConsoleMenu.Core.Logic.Menus.WithCommands;
+using ConsoleMenu.Core.Logic.Menus.WithListValues;
 
 namespace ConsoleMenu.Books {
 	public static class Program {
@@ -18,40 +23,61 @@ namespace ConsoleMenu.Books {
 			}
 			catch (Exception exception) {
 				Console.WriteLine(exception);
+				PrintHelper.ReadKeyForContinue();
 			}
 		}
 
 		private static void ReadBooksAndStartMenu() {
-			var books = ReadBooks();
-			CreateMenu(books).Start();
-			WriteBooks(books);
+			var wrapper = new ValueWrapper<IList<Book>> { Value = ReadBooks() };
+
+			CreateMenu().Start(wrapper);
+			WriteBooks(wrapper.Value);
 		}
 
 		private static IList<Book> ReadBooks() {
-			//if (!File.Exists(BooksFileName))
-			//	return new List<Book>();
+			if (!File.Exists(BooksFileName))
+				return new List<Book>();
 
-			//try {
-			//	return XmlSerializerHelper.Deserializing<List<Book>>(File.ReadAllBytes(BooksFileName));
-			//}
-			//catch {
-			//	return new List<Book>();
-			//}
-
-			return new List<Book> {
-				new Book { Title = "Title1", Author = "Author1", PagesCount = 100 },
-				new Book { Title = "Title2", Author = "Author2", PagesCount = 200 },
-				new Book { Title = "Title3", Author = "Author3", PagesCount = 300 }
-			};
+			try {
+				var books = XmlSerializerHelper.Deserializing<List<Book>>(File.ReadAllBytes(BooksFileName));
+				books.ForEach(book => book.Pages ??= new List<string>());
+				return books;
+			}
+			catch {
+				return new List<Book>();
+			}
 		}
 
 		private static void WriteBooks(IList<Book> books) {
-			//File.WriteAllBytes(BooksFileName, XmlSerializerHelper.Serializing(books));
+			File.WriteAllBytes(BooksFileName, XmlSerializerHelper.Serializing(books));
 		}
 
-		private static BaseMenu<IList<Book>> CreateMenu(IList<Book> books) {
-			var wrapper = new ValueWrapper<IList<Book>> { Value = books };
-			return new StaticMainMenu<IList<Book>>(wrapper, new ShowBooksCommand());
+		private static IMenu<ValueWrapper<IList<Book>>> CreateMenu() {
+			return new MainMenuWithCommands<ValueWrapper<IList<Book>>>(
+				new ShowBooksCommand("Показать список книг"),
+				new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(new BookTitleSubMenuWithListValues("Показать книгу",
+						new ShowBookCommand("Показать книгу")),
+					wrapper => wrapper.Value),
+				new AddBookCommand("Добавить книгу"),
+				new DeleteBookCommand("Удалить книгу"),
+				new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(new BookTitleSubMenuWithListValues("Редактировать книгу",
+						new SubMenuCommand<Book>(new SubMenuWithCommands<Book>("Редактировать книгу",
+							new EditBookTitleCommand("Редактировать название"),
+							new EditBookAuthorCommand("Редактировать автора"),
+							new SubMenuCommand<Book>(new SubMenuWithCommands<Book>("Редактировать страницы",
+								new AddBookPageCommand("Добавить страницу"),
+								new EditBookPageCommand("Редактировать страницу"),
+								new DeleteBookPageCommand("Удалить страницу")))))),
+					wrapper => wrapper.Value),
+				new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(new SubMenuWithCommands<IList<Book>>("Редактировать книгу 2",
+						new SubMenuCommand<IList<Book>>(new BookTitleSubMenuWithListValues("Редактировать название", new EditBookTitleCommand("Редактировать название"))),
+						new SubMenuCommand<IList<Book>>(new BookTitleSubMenuWithListValues("Редактировать автора", new EditBookAuthorCommand("Редактировать автора"))),
+						new SubMenuCommand<IList<Book>>(new BookTitleSubMenuWithListValues("Редактировать страницы",
+							new SubMenuCommand<Book>(new SubMenuWithCommands<Book>("Редактировать страницы",
+								new AddBookPageCommand("Добавить страницу"),
+								new EditBookPageCommand("Редактировать страницу"),
+								new DeleteBookPageCommand("Удалить страницу")))))),
+					wrapper => wrapper.Value));
 		}
 	}
 }

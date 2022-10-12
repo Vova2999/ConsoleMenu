@@ -1,6 +1,6 @@
 ﻿namespace ConsoleMenu.Core.Logic {
-	public interface ICommand<TValue> {
+	public interface ICommand<in TValue> {
 		string Description { get; }
-		void Execute(ValueWrapper<TValue> wrapper);
+		void Execute(TValue value);
 	}
 }

@@ -2,14 +2,14 @@
 	public class SubMenuCommand<TValue> : ICommand<TValue> {
 		public string Description => subMenu.Description;
 
-		private readonly ISubMenu subMenu;
+		private readonly ISubMenu<TValue> subMenu;
 
-		public SubMenuCommand(ISubMenu subMenu) {
+		public SubMenuCommand(ISubMenu<TValue> subMenu) {
 			this.subMenu = subMenu;
 		}
 
-		public void Execute(ValueWrapper<TValue> wrapper) {
-			subMenu.Start();
+		public void Execute(TValue value) {
+			subMenu.Start(value);
 		}
 	}
 }
