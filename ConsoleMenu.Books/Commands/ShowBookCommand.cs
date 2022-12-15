@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.Books.Entities;
 using ConsoleMenu.Books.Helpers;
 using ConsoleMenu.Core.Helpers;
@@ -13,7 +14,7 @@ namespace ConsoleMenu.Books.Commands {
 			Description = description;
 		}
 
-		public void Execute(Book book) {
+		public Task ExecuteAsync(Book book) {
 			Console.WriteLine($"Название: {book.Title}, Автор: {book.Author}, Количество страниц: {book.Pages.Count}");
 
 			Console.WriteLine("Вывести страницы?");
@@ -25,6 +26,8 @@ namespace ConsoleMenu.Books.Commands {
 				PrintHelper.PrintWithPause(book.Pages.Select((page, i) => $"{Environment.NewLine}Страница #{i + 1}{Environment.NewLine}{page}"));
 
 			PrintHelper.ReadKeyForContinue();
+
+			return Task.CompletedTask;
 		}
 	}
 }

@@ -19,7 +19,7 @@ namespace ConsoleMenu {
 					new MulIntCommand("Умножить"),
 					new DivIntCommand("Разделить"))));
 
-			mainMenu.Start(wrapper);
+			mainMenu.StartAsync(wrapper).Wait();
 		}
 	}
 }

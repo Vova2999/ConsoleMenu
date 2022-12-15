@@ -1,4 +1,5 @@
-﻿using ConsoleMenu.Core;
+﻿using System.Threading.Tasks;
+using ConsoleMenu.Core;
 using ConsoleMenu.Core.Logic;
 
 namespace ConsoleMenu.Commands {
@@ -12,8 +13,10 @@ namespace ConsoleMenu.Commands {
 			_cleanValue = cleanValue;
 		}
 
-		public void Execute(ValueWrapper<TValue> wrapper) {
+		public Task ExecuteAsync(ValueWrapper<TValue> wrapper) {
 			wrapper.Value = _cleanValue;
+
+			return Task.CompletedTask;
 		}
 	}
 }

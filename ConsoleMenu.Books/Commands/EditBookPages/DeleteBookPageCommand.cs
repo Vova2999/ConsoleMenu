@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.Books.Entities;
 using ConsoleMenu.Books.Helpers;
 using ConsoleMenu.Core.Helpers;
@@ -13,7 +14,7 @@ namespace ConsoleMenu.Books.Commands.EditBookPages {
 			Description = description;
 		}
 
-		public void Execute(Book book) {
+		public Task ExecuteAsync(Book book) {
 			Console.WriteLine("Введите номер удаляемой страницы");
 
 			Console.WriteLine("Вывести страницы?");
@@ -27,9 +28,11 @@ namespace ConsoleMenu.Books.Commands.EditBookPages {
 			Console.WriteLine("Введите 0 для отмены");
 			var pageSelector = ConsoleReadHelper.ReadInt(" => ", 0, book.Pages.Count);
 			if (pageSelector == 0)
-				return;
+				return Task.CompletedTask;
 
 			book.Pages.RemoveAt(pageSelector - 1);
+
+			return Task.CompletedTask;
 		}
 	}
 }

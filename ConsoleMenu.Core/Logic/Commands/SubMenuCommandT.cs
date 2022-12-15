@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace ConsoleMenu.Core.Logic.Commands {
 	public class SubMenuCommand<TValue, TSubValue> : ICommand<TValue> {
@@ -12,8 +13,8 @@ namespace ConsoleMenu.Core.Logic.Commands {
 			_selector = selector;
 		}
 
-		public void Execute(TValue value) {
-			_subMenu.Start(_selector(value));
+		public Task ExecuteAsync(TValue value) {
+			return _subMenu.StartAsync(_selector(value));
 		}
 	}
 }

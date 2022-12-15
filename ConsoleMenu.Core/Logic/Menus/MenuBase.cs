@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.Core.Extensions;
 
 namespace ConsoleMenu.Core.Logic.Menus {
 	public abstract class MenuBase<TValue> {
 		protected abstract string BackCommandDescription { get; }
 
-		public void Start(TValue value) {
+		public async Task StartAsync(TValue value) {
 			while (true) {
 				Console.Clear();
 				PrintCommands(value);
@@ -16,7 +17,7 @@ namespace ConsoleMenu.Core.Logic.Menus {
 				if (selector == 0)
 					break;
 
-				ExecuteCommand(value, selector - 1);
+				await ExecuteCommandAsync(value, selector - 1).ConfigureAwait(false);
 			}
 		}
 
@@ -31,6 +32,6 @@ namespace ConsoleMenu.Core.Logic.Menus {
 
 		protected abstract int ReadSelector(TValue value);
 
-		protected abstract void ExecuteCommand(TValue value, int index);
+		protected abstract Task ExecuteCommandAsync(TValue value, int index);
 	}
 }

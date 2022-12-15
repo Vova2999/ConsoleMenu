@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ConsoleMenu.Core;
 using ConsoleMenu.Core.Logic;
 
@@ -10,9 +11,11 @@ namespace ConsoleMenu.Commands {
 			Description = description;
 		}
 
-		public void Execute(ValueWrapper<TValue> wrapper) {
+		public Task ExecuteAsync(ValueWrapper<TValue> wrapper) {
 			Console.WriteLine(wrapper.Value);
 			Console.ReadKey();
+
+			return Task.CompletedTask;
 		}
 	}
 }

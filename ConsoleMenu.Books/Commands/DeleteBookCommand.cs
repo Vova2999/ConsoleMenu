@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.Books.Entities;
 using ConsoleMenu.Books.Helpers;
 using ConsoleMenu.Core;
@@ -15,7 +16,7 @@ namespace ConsoleMenu.Books.Commands {
 			Description = description;
 		}
 
-		public void Execute(ValueWrapper<IList<Book>> wrapper) {
+		public Task ExecuteAsync(ValueWrapper<IList<Book>> wrapper) {
 			Console.WriteLine("Введите номер удаляемой книги");
 
 			Console.WriteLine("Вывести книги?");
@@ -29,9 +30,11 @@ namespace ConsoleMenu.Books.Commands {
 			Console.WriteLine("Введите 0 для отмены");
 			var bookSelector = ConsoleReadHelper.ReadInt(" => ", 0, wrapper.Value.Count);
 			if (bookSelector == 0)
-				return;
+				return Task.CompletedTask;
 
 			wrapper.Value.RemoveAt(bookSelector - 1);
+
+			return Task.CompletedTask;
 		}
 	}
 }

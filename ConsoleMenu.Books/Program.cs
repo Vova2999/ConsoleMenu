@@ -29,7 +29,7 @@ namespace ConsoleMenu.Books {
 		private static void ReadBooksAndStartMenu() {
 			var wrapper = new ValueWrapper<IList<Book>> { Value = ReadBooks() };
 
-			CreateMenu().Start(wrapper);
+			CreateMenu().StartAsync(wrapper).Wait();
 			WriteBooks(wrapper.Value);
 		}
 

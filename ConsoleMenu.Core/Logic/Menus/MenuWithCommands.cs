@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.Core.Helpers;
 
 namespace ConsoleMenu.Core.Logic.Menus {
@@ -18,8 +19,8 @@ namespace ConsoleMenu.Core.Logic.Menus {
 			return ConsoleReadHelper.ReadInt(" => ", 0, _commands.Length);
 		}
 
-		protected override void ExecuteCommand(TValue value, int index) {
-			_commands[index].Execute(value);
+		protected override Task ExecuteCommandAsync(TValue value, int index) {
+			return _commands[index].ExecuteAsync(value);
 		}
 	}
 }

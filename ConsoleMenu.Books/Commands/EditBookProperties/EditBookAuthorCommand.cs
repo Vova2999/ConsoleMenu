@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ConsoleMenu.Books.Entities;
 using ConsoleMenu.Core.Logic;
 
@@ -10,9 +11,11 @@ namespace ConsoleMenu.Books.Commands.EditBookProperties {
 			Description = description;
 		}
 
-		public void Execute(Book book) {
+		public Task ExecuteAsync(Book book) {
 			Console.Write("Введите автора => ");
 			book.Author = Console.ReadLine();
+
+			return Task.CompletedTask;
 		}
 	}
 }

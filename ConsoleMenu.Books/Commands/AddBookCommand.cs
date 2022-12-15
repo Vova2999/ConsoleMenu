@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ConsoleMenu.Books.Entities;
 using ConsoleMenu.Core;
 using ConsoleMenu.Core.Logic;
@@ -12,7 +13,7 @@ namespace ConsoleMenu.Books.Commands {
 			Description = description;
 		}
 
-		public void Execute(ValueWrapper<IList<Book>> wrapper) {
+		public Task ExecuteAsync(ValueWrapper<IList<Book>> wrapper) {
 			Console.Write("Введите название книги => ");
 			var title = Console.ReadLine();
 
@@ -20,6 +21,8 @@ namespace ConsoleMenu.Books.Commands {
 			var author = Console.ReadLine();
 
 			wrapper.Value.Add(new Book { Title = title, Author = author, Pages = new List<string>() });
+
+			return Task.CompletedTask;
 		}
 	}
 }

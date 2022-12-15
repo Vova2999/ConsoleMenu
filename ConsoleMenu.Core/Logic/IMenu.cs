@@ -1,5 +1,7 @@
-﻿namespace ConsoleMenu.Core.Logic {
+﻿using System.Threading.Tasks;
+
+namespace ConsoleMenu.Core.Logic {
 	public interface IMenu<in TValue> {
-		void Start(TValue value);
+		Task StartAsync(TValue value);
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.Core.Helpers;
 
 namespace ConsoleMenu.Core.Logic.Menus {
@@ -21,8 +22,8 @@ namespace ConsoleMenu.Core.Logic.Menus {
 			return ConsoleReadHelper.ReadInt(" => ", 0, values.Count);
 		}
 
-		protected override void ExecuteCommand(IList<TValue> values, int index) {
-			_command.Execute(values[index]);
+		protected override Task ExecuteCommandAsync(IList<TValue> values, int index) {
+			return _command.ExecuteAsync(values[index]);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.Books.Entities;
 using ConsoleMenu.Books.Extensions;
 using ConsoleMenu.Books.Helpers;
@@ -15,7 +16,7 @@ namespace ConsoleMenu.Books.Commands.EditBookPages {
 			Description = description;
 		}
 
-		public void Execute(Book book) {
+		public Task ExecuteAsync(Book book) {
 			Console.WriteLine("Вывести страницы?");
 			Console.WriteLine("1: Да");
 			Console.WriteLine("0: Нет");
@@ -28,7 +29,7 @@ namespace ConsoleMenu.Books.Commands.EditBookPages {
 			Console.WriteLine("Введите 0 для отмены");
 			var pageSelector = ConsoleReadHelper.ReadInt(" => ", 0, book.Pages.Count);
 			if (pageSelector == 0)
-				return;
+				return Task.CompletedTask;
 
 			Console.WriteLine("Введите новую страницу. Конец ввода - пустая строка");
 
@@ -43,6 +44,8 @@ namespace ConsoleMenu.Books.Commands.EditBookPages {
 
 			book.Pages.RemoveAt(pageSelector - 1);
 			book.Pages.Insert(pageSelector - 1, string.Join(Environment.NewLine, lines));
+
+			return Task.CompletedTask;
 		}
 	}
 }

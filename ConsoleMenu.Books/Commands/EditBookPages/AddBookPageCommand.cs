@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.Books.Entities;
 using ConsoleMenu.Books.Extensions;
 using ConsoleMenu.Books.Helpers;
@@ -15,7 +16,7 @@ namespace ConsoleMenu.Books.Commands.EditBookPages {
 			Description = description;
 		}
 
-		public void Execute(Book book) {
+		public Task ExecuteAsync(Book book) {
 			Console.WriteLine("Введите новую страницу. Конец ввода - пустая строка");
 
 			var lines = new List<string>();
@@ -40,12 +41,14 @@ namespace ConsoleMenu.Books.Commands.EditBookPages {
 			Console.WriteLine("Введите -1 для вставки в конец, 0 для отмены");
 			var pageSelector = ConsoleReadHelper.ReadInt(" => ", -1, book.Pages.Count);
 			if (pageSelector == 0)
-				return;
+				return Task.CompletedTask;
 
 			if (pageSelector == -1)
 				book.Pages.Add(string.Join(Environment.NewLine, lines));
 			else
 				book.Pages.Insert(pageSelector - 1, string.Join(Environment.NewLine, lines));
+
+			return Task.CompletedTask;
 		}
 	}
 }

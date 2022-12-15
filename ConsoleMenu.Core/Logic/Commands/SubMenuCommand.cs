@@ -1,4 +1,6 @@
-﻿namespace ConsoleMenu.Core.Logic.Commands {
+﻿using System.Threading.Tasks;
+
+namespace ConsoleMenu.Core.Logic.Commands {
 	public class SubMenuCommand<TValue> : ICommand<TValue> {
 		public string Description => _subMenu.Description;
 
@@ -8,8 +10,8 @@
 			_subMenu = subMenu;
 		}
 
-		public void Execute(TValue value) {
-			_subMenu.Start(value);
+		public Task ExecuteAsync(TValue value) {
+			return _subMenu.StartAsync(value);
 		}
 	}
 }
