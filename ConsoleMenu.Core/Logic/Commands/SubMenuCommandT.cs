@@ -2,18 +2,18 @@
 
 namespace ConsoleMenu.Core.Logic.Commands {
 	public class SubMenuCommand<TValue, TSubValue> : ICommand<TValue> {
-		public string Description => subMenu.Description;
+		public string Description => _subMenu.Description;
 
-		private readonly ISubMenu<TSubValue> subMenu;
-		private readonly Func<TValue, TSubValue> selector;
+		private readonly ISubMenu<TSubValue> _subMenu;
+		private readonly Func<TValue, TSubValue> _selector;
 
 		public SubMenuCommand(ISubMenu<TSubValue> subMenu, Func<TValue, TSubValue> selector) {
-			this.subMenu = subMenu;
-			this.selector = selector;
+			_subMenu = subMenu;
+			_selector = selector;
 		}
 
 		public void Execute(TValue value) {
-			subMenu.Start(selector(value));
+			_subMenu.Start(_selector(value));
 		}
 	}
 }

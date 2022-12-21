@@ -5,16 +5,16 @@ using ConsoleMenu.Core.Helpers;
 
 namespace ConsoleMenu.Core.Logic.Menus {
 	public abstract class MenuWithListValues<TValue> : MenuBase<IList<TValue>> {
-		private readonly ICommand<TValue> command;
-		private readonly Func<TValue, string> getValueDescription;
+		private readonly ICommand<TValue> _command;
+		private readonly Func<TValue, string> _getValueDescription;
 
 		protected MenuWithListValues(ICommand<TValue> command, Func<TValue, string> getValueDescription) {
-			this.command = command;
-			this.getValueDescription = getValueDescription;
+			_command = command;
+			_getValueDescription = getValueDescription;
 		}
 
 		protected override IEnumerable<string> GetCommandDescriptions(IList<TValue> values) {
-			return values.Select(getValueDescription);
+			return values.Select(_getValueDescription);
 		}
 
 		protected override int ReadSelector(IList<TValue> values) {
@@ -22,7 +22,7 @@ namespace ConsoleMenu.Core.Logic.Menus {
 		}
 
 		protected override void ExecuteCommand(IList<TValue> values, int index) {
-			command.Execute(values[index]);
+			_command.Execute(values[index]);
 		}
 	}
 }

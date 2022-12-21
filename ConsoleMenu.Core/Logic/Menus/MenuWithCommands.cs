@@ -4,22 +4,22 @@ using ConsoleMenu.Core.Helpers;
 
 namespace ConsoleMenu.Core.Logic.Menus {
 	public abstract class MenuWithCommands<TValue> : MenuBase<TValue> {
-		private readonly ICommand<TValue>[] commands;
+		private readonly ICommand<TValue>[] _commands;
 
 		protected MenuWithCommands(params ICommand<TValue>[] commands) {
-			this.commands = commands;
+			_commands = commands;
 		}
 
 		protected override IEnumerable<string> GetCommandDescriptions(TValue value) {
-			return commands.Select(command => command.Description);
+			return _commands.Select(command => command.Description);
 		}
 
 		protected override int ReadSelector(TValue value) {
-			return ConsoleReadHelper.ReadInt(" => ", 0, commands.Length);
+			return ConsoleReadHelper.ReadInt(" => ", 0, _commands.Length);
 		}
 
 		protected override void ExecuteCommand(TValue value, int index) {
-			commands[index].Execute(value);
+			_commands[index].Execute(value);
 		}
 	}
 }
