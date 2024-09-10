@@ -79,6 +79,14 @@ public static class Program
 			new FindCarByNameCommand("Поиск по имени", carFinder),
 			new FindCarByMakeYearCommand("Поиск по году выпуска", carFinder),
 			new FindCarByEngineCapacityCommand("Поиск по мощности двигателя", carFinder),
-			new FindCarByCostCommand("Поиск по стоимости", carFinder));
+			new FindCarByCostCommand("Поиск по стоимости", carFinder),
+			new SubMenuConvertCommand<IReadOnlyList<int>>(
+				new SubMenuWithListValues<int>(
+					new SelectCommand<int, IReadOnlyList<Car>>(
+						new ShowSelectedCarsCommand("Показать машины по году выпуска"),
+						makeYear => carDb.Cars.Where(c => c.MakeYear == makeYear).ToList()),
+					makeYear => makeYear.ToString()),
+				() => carDb.Cars.Select(c => c.MakeYear).Distinct().OrderBy(x => x).ToList()
+			));
 	}
 }

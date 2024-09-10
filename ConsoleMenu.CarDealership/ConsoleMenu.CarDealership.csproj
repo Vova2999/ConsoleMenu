@@ -48,6 +48,7 @@
     <Compile Include="Commands\FindCarByMakeYearCommand.cs" />
     <Compile Include="Commands\FindCarByNameCommand.cs" />
     <Compile Include="Commands\ShowCarsCommand.cs" />
+    <Compile Include="Commands\ShowSelectedCarsCommand.cs" />
     <Compile Include="DataBase\CarDb.cs" />
     <Compile Include="DataBase\ICarDB.cs" />
     <Compile Include="Entities\Car.cs" />

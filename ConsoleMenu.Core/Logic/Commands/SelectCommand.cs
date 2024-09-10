@@ -4,14 +4,13 @@ namespace ConsoleMenu.Core.Logic.Commands;
 
 public class SelectCommand<TSubValue> : ICommand
 {
-	public string Description { get; }
+	public string Description => _command.Description;
 
 	private readonly ICommand<TSubValue> _command;
 	private readonly Func<TSubValue> _selector;
 
-	public SelectCommand(string description, ICommand<TSubValue> command, Func<TSubValue> selector)
+	public SelectCommand(ICommand<TSubValue> command, Func<TSubValue> selector)
 	{
-		Description = description;
 		_command = command;
 		_selector = selector;
 	}
