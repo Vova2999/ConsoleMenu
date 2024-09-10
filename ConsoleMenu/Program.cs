@@ -14,14 +14,18 @@ public static class Program
 
 		var mainMenu = new MainMenuWithCommands<ValueWrapper<int>>(
 			new ShowCommand<int>("Показать"),
-			new SubMenuCommand<ValueWrapper<int>>(new SubMenuWithCommands<ValueWrapper<int>>("Базовые операции",
-				new ShowCommand<int>("Показать"),
-				new CleanCommand<int>("Очистить"))),
-			new SubMenuCommand<ValueWrapper<int>>(new SubMenuWithCommands<ValueWrapper<int>>("Математические операции",
-				new AddIntCommand("Добавить"),
-				new SubIntCommand("Вычесть"),
-				new MulIntCommand("Умножить"),
-				new DivIntCommand("Разделить"))));
+			new SubMenuCommand<ValueWrapper<int>>(
+				new SubMenuWithCommands<ValueWrapper<int>>(
+					"Базовые операции",
+					new ShowCommand<int>("Показать"),
+					new CleanCommand<int>("Очистить"))),
+			new SubMenuCommand<ValueWrapper<int>>(
+				new SubMenuWithCommands<ValueWrapper<int>>(
+					"Математические операции",
+					new AddIntCommand("Добавить"),
+					new SubIntCommand("Вычесть"),
+					new MulIntCommand("Умножить"),
+					new DivIntCommand("Разделить"))));
 
 		await mainMenu.StartAsync(wrapper).ConfigureAwait(false);
 	}
