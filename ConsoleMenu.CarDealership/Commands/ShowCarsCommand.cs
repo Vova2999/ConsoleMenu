@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.CarDealership.DataBase;
 using ConsoleMenu.CarDealership.Extensions;
 using ConsoleMenu.CarDealership.Helpers;
@@ -21,12 +22,14 @@ public class ShowCarsCommand : ICommand
 		IsBackAfterExecute = isBackAfterExecute;
 	}
 
-	public void Execute()
+	public Task ExecuteAsync()
 	{
 		_carDb.Cars
 			.Select(car => $"Id: {car.Id}, Имя: {car.Name}, Год выпуска: {car.MakeYear}, Мощность двигателя: {car.EngineCapacity}, Стоимость: {car.Cost}")
 			.ForEach(Console.WriteLine);
 
 		PrintHelper.ReadKeyForContinue();
+
+		return Task.CompletedTask;
 	}
 }

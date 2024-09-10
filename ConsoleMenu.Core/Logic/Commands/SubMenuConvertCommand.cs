@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace ConsoleMenu.Core.Logic.Commands;
 
@@ -23,8 +24,8 @@ public class SubMenuConvertCommand<TSubValue> : ICommand
 		_selector = selector;
 	}
 
-	public void Execute()
+	public Task ExecuteAsync()
 	{
-		_subMenu.Start(_selector());
+		return _subMenu.StartAsync(_selector());
 	}
 }

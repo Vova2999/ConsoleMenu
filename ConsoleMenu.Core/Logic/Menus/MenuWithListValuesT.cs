@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.Core.Helpers;
 
 namespace ConsoleMenu.Core.Logic.Menus;
@@ -32,9 +33,9 @@ public abstract class MenuWithListValues<TValue> : MenuBase<IEnumerable<TValue>>
 		return ConsoleReadHelper.ReadInt(" => ", 0, values.Count());
 	}
 
-	protected override void ExecuteCommand(IEnumerable<TValue> values, int index)
+	protected override Task ExecuteCommandAsync(IEnumerable<TValue> values, int index)
 	{
-		_command.Execute(values.ElementAt(index));
+		return _command.ExecuteAsync(values.ElementAt(index));
 	}
 
 	protected override bool IsBackAfterExecuteCommand(int index)

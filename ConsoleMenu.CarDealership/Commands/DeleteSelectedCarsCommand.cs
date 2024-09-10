@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.CarDealership.DataBase;
 using ConsoleMenu.CarDealership.Entities;
 using ConsoleMenu.CarDealership.Extensions;
@@ -21,8 +22,10 @@ public class DeleteSelectedCarsCommand : ICommand<IEnumerable<Car>>
 		Description = description;
 	}
 
-	public void Execute(IEnumerable<Car> value)
+	public Task ExecuteAsync(IEnumerable<Car> value)
 	{
 		value.ToArray().ForEach(_carDb.Delete);
+
+		return Task.CompletedTask;
 	}
 }

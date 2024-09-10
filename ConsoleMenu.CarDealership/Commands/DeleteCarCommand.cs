@@ -1,4 +1,5 @@
-﻿using ConsoleMenu.CarDealership.DataBase;
+﻿using System.Threading.Tasks;
+using ConsoleMenu.CarDealership.DataBase;
 using ConsoleMenu.CarDealership.Entities;
 using ConsoleMenu.Core.Logic;
 
@@ -18,8 +19,10 @@ public class DeleteCarCommand : ICommand<Car>
 		IsBackAfterExecute = isBackAfterExecute;
 	}
 
-	public void Execute(Car car)
+	public Task ExecuteAsync(Car car)
 	{
 		_carDb.Delete(car);
+
+		return Task.CompletedTask;
 	}
 }

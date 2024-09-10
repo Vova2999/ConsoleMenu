@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using ConsoleMenu.Books.Commands;
 using ConsoleMenu.Books.Commands.EditBookPages;
 using ConsoleMenu.Books.Commands.EditBookProperties;
@@ -18,11 +19,11 @@ public static class Program
 {
 	private const string BooksFileName = "Books.xml";
 
-	public static void Main()
+	public static async Task Main()
 	{
 		try
 		{
-			ReadBooksAndStartMenu();
+			await ReadBooksAndStartMenuAsync().ConfigureAwait(false);
 		}
 		catch (Exception exception)
 		{
@@ -31,11 +32,12 @@ public static class Program
 		}
 	}
 
-	private static void ReadBooksAndStartMenu()
+	private static async Task ReadBooksAndStartMenuAsync()
 	{
 		var wrapper = new ValueWrapper<IList<Book>> { Value = ReadBooks() };
 
-		CreateMenu().StartAsync(wrapper).Wait();
+		await CreateMenu().StartAsync(wrapper).ConfigureAwait(false);
+
 		WriteBooks(wrapper.Value);
 	}
 

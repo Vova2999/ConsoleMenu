@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.CarDealership.Extensions;
 using ConsoleMenu.CarDealership.Helpers;
 using ConsoleMenu.CarDealership.Services;
@@ -21,7 +22,7 @@ public class FindCarByEngineCapacityCommand : ICommand
 		IsBackAfterExecute = isBackAfterExecute;
 	}
 
-	public void Execute()
+	public Task ExecuteAsync()
 	{
 		Console.WriteLine("Введите мощность двигателя: ");
 		var engineCapacity = double.Parse(Console.ReadLine()!);
@@ -31,5 +32,7 @@ public class FindCarByEngineCapacityCommand : ICommand
 		_carFinder.FindByEngineCapacity(engineCapacity).Select(car => $"Id: {car.Id}, Имя: {car.Name}").ForEach(Console.WriteLine);
 
 		PrintHelper.ReadKeyForContinue();
+
+		return Task.CompletedTask;
 	}
 }

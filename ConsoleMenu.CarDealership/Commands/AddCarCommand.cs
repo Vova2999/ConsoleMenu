@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ConsoleMenu.CarDealership.DataBase;
 using ConsoleMenu.CarDealership.Entities;
 using ConsoleMenu.Core.Logic;
@@ -19,7 +20,7 @@ public class AddCarCommand : ICommand
 		IsBackAfterExecute = isBackAfterExecute;
 	}
 
-	public void Execute()
+	public Task ExecuteAsync()
 	{
 		Console.Write("Введите имя: ");
 		var name = Console.ReadLine();
@@ -40,5 +41,7 @@ public class AddCarCommand : ICommand
 			EngineCapacity = engineCapacity,
 			Cost = cost
 		});
+
+		return Task.CompletedTask;
 	}
 }

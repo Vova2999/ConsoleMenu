@@ -29,7 +29,6 @@ public abstract class MenuBase
 				break;
 
 			await ExecuteCommandAsync(selector - 1).ConfigureAwait(false);
-
 			if (_isBackAfterExecute || IsBackAfterExecuteCommand(selector - 1))
 				break;
 		}
@@ -48,7 +47,6 @@ public abstract class MenuBase
 	protected abstract int ReadSelector();
 
 	protected abstract Task ExecuteCommandAsync(int index);
-
 
 	protected abstract bool IsBackAfterExecuteCommand(int index);
 }

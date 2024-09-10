@@ -1,5 +1,6 @@
-﻿namespace ConsoleMenu.Core.Logic.Commands;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+
+namespace ConsoleMenu.Core.Logic.Commands;
 
 public class SubMenuCommand<TValue> : ICommand<TValue>
 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.CarDealership.Commands;
 using ConsoleMenu.CarDealership.DataBase;
 using ConsoleMenu.CarDealership.Entities;
@@ -19,14 +20,14 @@ public static class Program
 {
 	private const string CarsFileName = "Cars.xml";
 
-	public static void Main()
+	public static async Task Main()
 	{
 		ICarDb carDb = new CarDb();
 		ICarFinder carFinder = new CarFinder(carDb);
 
 		try
 		{
-			ReadCarsAndStartMenu(carDb, carFinder);
+			await ReadCarsAndStartMenuAsync(carDb, carFinder).ConfigureAwait(false);
 		}
 		catch (Exception exception)
 		{
@@ -35,11 +36,11 @@ public static class Program
 		}
 	}
 
-	private static void ReadCarsAndStartMenu(ICarDb carDb, ICarFinder carFinder)
+	private static async Task ReadCarsAndStartMenuAsync(ICarDb carDb, ICarFinder carFinder)
 	{
 		ReadCars().ForEach(carDb.Add);
 
-		CreateMenu(carDb, carFinder).Start();
+		await CreateMenu(carDb, carFinder).StartAsync().ConfigureAwait(false);
 
 		WriteCars(carDb.Cars);
 	}

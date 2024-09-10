@@ -1,4 +1,5 @@
-﻿using ConsoleMenu.Commands;
+﻿using System.Threading.Tasks;
+using ConsoleMenu.Commands;
 using ConsoleMenu.Core;
 using ConsoleMenu.Core.Logic.Commands;
 using ConsoleMenu.Core.Logic.Menus.WithCommands;
@@ -7,7 +8,7 @@ namespace ConsoleMenu;
 
 public static class Program
 {
-	public static void Main()
+	public static async Task Main()
 	{
 		var wrapper = new ValueWrapper<int>();
 
@@ -22,6 +23,6 @@ public static class Program
 				new MulIntCommand("Умножить"),
 				new DivIntCommand("Разделить"))));
 
-		mainMenu.StartAsync(wrapper).Wait();
+		await mainMenu.StartAsync(wrapper).ConfigureAwait(false);
 	}
 }

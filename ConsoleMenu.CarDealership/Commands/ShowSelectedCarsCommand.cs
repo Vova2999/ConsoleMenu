@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.CarDealership.Entities;
 using ConsoleMenu.CarDealership.Extensions;
 using ConsoleMenu.CarDealership.Helpers;
@@ -19,12 +20,14 @@ public class ShowSelectedCarsCommand : ICommand<IEnumerable<Car>>
 		IsBackAfterExecute = isBackAfterExecute;
 	}
 
-	public void Execute(IEnumerable<Car> value)
+	public Task ExecuteAsync(IEnumerable<Car> value)
 	{
 		value
 			.Select(car => $"Id: {car.Id}, Имя: {car.Name}, Год выпуска: {car.MakeYear}, Мощность двигателя: {car.EngineCapacity}, Стоимость: {car.Cost}")
 			.ForEach(Console.WriteLine);
 
 		PrintHelper.ReadKeyForContinue();
+
+		return Task.CompletedTask;
 	}
 }

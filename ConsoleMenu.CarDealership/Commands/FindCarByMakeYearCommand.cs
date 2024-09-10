@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.CarDealership.Extensions;
 using ConsoleMenu.CarDealership.Helpers;
 using ConsoleMenu.CarDealership.Services;
@@ -21,7 +22,7 @@ public class FindCarByMakeYearCommand : ICommand
 		IsBackAfterExecute = isBackAfterExecute;
 	}
 
-	public void Execute()
+	public Task ExecuteAsync()
 	{
 		Console.WriteLine("Введите год выпуска: ");
 		var makeYear = int.Parse(Console.ReadLine()!);
@@ -31,5 +32,7 @@ public class FindCarByMakeYearCommand : ICommand
 		_carFinder.FindByMakeYear(makeYear).Select(car => $"Id: {car.Id}, Имя: {car.Name}").ForEach(Console.WriteLine);
 
 		PrintHelper.ReadKeyForContinue();
+
+		return Task.CompletedTask;
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.CarDealership.Extensions;
 using ConsoleMenu.CarDealership.Helpers;
 using ConsoleMenu.CarDealership.Services;
@@ -21,7 +22,7 @@ public class FindCarByCostCommand : ICommand
 		IsBackAfterExecute = isBackAfterExecute;
 	}
 
-	public void Execute()
+	public Task ExecuteAsync()
 	{
 		Console.WriteLine("Введите стоимость: ");
 		var cost = double.Parse(Console.ReadLine()!);
@@ -31,5 +32,7 @@ public class FindCarByCostCommand : ICommand
 		_carFinder.FindByCost(cost).Select(car => $"Id: {car.Id}, Имя: {car.Name}").ForEach(Console.WriteLine);
 
 		PrintHelper.ReadKeyForContinue();
+
+		return Task.CompletedTask;
 	}
 }
