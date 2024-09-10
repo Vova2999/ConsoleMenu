@@ -1,17 +1,20 @@
 ﻿using System.Threading.Tasks;
 
-namespace ConsoleMenu.Core.Logic.Commands {
-	public class SubMenuCommand<TValue> : ICommand<TValue> {
-		public string Description => _subMenu.Description;
+namespace ConsoleMenu.Core.Logic.Commands;
 
-		private readonly ISubMenu<TValue> _subMenu;
+public class SubMenuCommand<TValue> : ICommand<TValue>
+{
+	public string Description => _subMenu.Description;
 
-		public SubMenuCommand(ISubMenu<TValue> subMenu) {
-			_subMenu = subMenu;
-		}
+	private readonly ISubMenu<TValue> _subMenu;
 
-		public Task ExecuteAsync(TValue value) {
-			return _subMenu.StartAsync(value);
-		}
+	public SubMenuCommand(ISubMenu<TValue> subMenu)
+	{
+		_subMenu = subMenu;
+	}
+
+	public Task ExecuteAsync(TValue value)
+	{
+		return _subMenu.StartAsync(value);
 	}
 }

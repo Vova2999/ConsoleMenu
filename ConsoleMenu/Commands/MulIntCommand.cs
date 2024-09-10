@@ -4,21 +4,24 @@ using ConsoleMenu.Core;
 using ConsoleMenu.Core.Helpers;
 using ConsoleMenu.Core.Logic;
 
-namespace ConsoleMenu.Commands {
-	public class MulIntCommand : ICommand<ValueWrapper<int>> {
-		public string Description { get; }
+namespace ConsoleMenu.Commands;
 
-		public MulIntCommand(string description) {
-			Description = description;
-		}
+public class MulIntCommand : ICommand<ValueWrapper<int>>
+{
+	public string Description { get; }
 
-		public Task ExecuteAsync(ValueWrapper<int> wrapper) {
-			Console.Write("Введите число для умножения");
-			var value = ConsoleReadHelper.ReadInt(" => ", int.MinValue, int.MaxValue);
+	public MulIntCommand(string description)
+	{
+		Description = description;
+	}
 
-			wrapper.Value *= value;
+	public Task ExecuteAsync(ValueWrapper<int> wrapper)
+	{
+		Console.Write("Введите число для умножения");
+		var value = ConsoleReadHelper.ReadInt(" => ", int.MinValue, int.MaxValue);
 
-			return Task.CompletedTask;
-		}
+		wrapper.Value *= value;
+
+		return Task.CompletedTask;
 	}
 }

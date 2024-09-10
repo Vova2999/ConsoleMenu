@@ -12,82 +12,92 @@ using ConsoleMenu.Core.Logic;
 using ConsoleMenu.Core.Logic.Commands;
 using ConsoleMenu.Core.Logic.Menus.WithCommands;
 
-namespace ConsoleMenu.Books {
-	public static class Program {
-		private const string BooksFileName = "Books.xml";
+namespace ConsoleMenu.Books;
 
-		public static void Main(string[] args) {
-			try {
-				ReadBooksAndStartMenu();
-			}
-			catch (Exception exception) {
-				Console.WriteLine(exception);
-				PrintHelper.ReadKeyForContinue();
-			}
+public static class Program
+{
+	private const string BooksFileName = "Books.xml";
+
+	public static void Main(string[] args)
+	{
+		try
+		{
+			ReadBooksAndStartMenu();
 		}
-
-		private static void ReadBooksAndStartMenu() {
-			var wrapper = new ValueWrapper<IList<Book>> { Value = ReadBooks() };
-
-			CreateMenu().StartAsync(wrapper).Wait();
-			WriteBooks(wrapper.Value);
+		catch (Exception exception)
+		{
+			Console.WriteLine(exception);
+			PrintHelper.ReadKeyForContinue();
 		}
+	}
 
-		private static IList<Book> ReadBooks() {
-			if (!File.Exists(BooksFileName))
-				return new List<Book>();
+	private static void ReadBooksAndStartMenu()
+	{
+		var wrapper = new ValueWrapper<IList<Book>> { Value = ReadBooks() };
 
-			try {
-				var books = XmlSerializerHelper.Deserializing<List<Book>>(File.ReadAllBytes(BooksFileName));
-				books.ForEach(book => book.Pages ??= new List<string>());
-				return books;
-			}
-			catch {
-				return new List<Book>();
-			}
+		CreateMenu().StartAsync(wrapper).Wait();
+		WriteBooks(wrapper.Value);
+	}
+
+	private static IList<Book> ReadBooks()
+	{
+		if (!File.Exists(BooksFileName))
+			return new List<Book>();
+
+		try
+		{
+			var books = XmlSerializerHelper.Deserializing<List<Book>>(File.ReadAllBytes(BooksFileName));
+			books.ForEach(book => book.Pages ??= new List<string>());
+			return books;
 		}
-
-		private static void WriteBooks(IList<Book> books) {
-			File.WriteAllBytes(BooksFileName, XmlSerializerHelper.Serializing(books));
+		catch
+		{
+			return new List<Book>();
 		}
+	}
 
-		private static IMenu<ValueWrapper<IList<Book>>> CreateMenu() {
-			return new MainMenuWithCommands<ValueWrapper<IList<Book>>>(
-				new ShowBooksCommand("Показать список книг"),
-				new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(
-					new BookTitleSubMenuWithListValues(
-						new ShowBookCommand("Показать книгу")),
-					wrapper => wrapper.Value),
-				new AddBookCommand("Добавить книгу"),
-				new DeleteBookCommand("Удалить книгу"),
-				new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(
-					new BookTitleSubMenuWithListValues(
-						new SubMenuCommand<Book>(
-							new SubMenuWithCommands<Book>("Редактировать книгу",
-								new EditBookTitleCommand("Редактировать название"),
-								new EditBookAuthorCommand("Редактировать автора"),
-								new SubMenuCommand<Book>(
-									new SubMenuWithCommands<Book>("Редактировать страницы",
-										new AddBookPageCommand("Добавить страницу"),
-										new EditBookPageCommand("Редактировать страницу"),
-										new DeleteBookPageCommand("Удалить страницу")))))),
-					wrapper => wrapper.Value),
-				new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(
-					new SubMenuWithCommands<IList<Book>>("Редактировать книгу 2",
-						new SubMenuCommand<IList<Book>>(
-							new BookTitleSubMenuWithListValues(
-								new EditBookTitleCommand("Редактировать название"))),
-						new SubMenuCommand<IList<Book>>(
-							new BookTitleSubMenuWithListValues(
-								new EditBookAuthorCommand("Редактировать автора"))),
-						new SubMenuCommand<IList<Book>>(
-							new BookTitleSubMenuWithListValues(
-								new SubMenuCommand<Book>(
-									new SubMenuWithCommands<Book>("Редактировать страницы",
-										new AddBookPageCommand("Добавить страницу"),
-										new EditBookPageCommand("Редактировать страницу"),
-										new DeleteBookPageCommand("Удалить страницу")))))),
-					wrapper => wrapper.Value));
-		}
+	private static void WriteBooks(IList<Book> books)
+	{
+		File.WriteAllBytes(BooksFileName, XmlSerializerHelper.Serializing(books));
+	}
+
+	private static IMenu<ValueWrapper<IList<Book>>> CreateMenu()
+	{
+		return new MainMenuWithCommands<ValueWrapper<IList<Book>>>(
+			new ShowBooksCommand("Показать список книг"),
+			new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(
+				new BookTitleSubMenuWithListValues(
+					new ShowBookCommand("Показать книгу")),
+				wrapper => wrapper.Value),
+			new AddBookCommand("Добавить книгу"),
+			new DeleteBookCommand("Удалить книгу"),
+			new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(
+				new BookTitleSubMenuWithListValues(
+					new SubMenuCommand<Book>(
+						new SubMenuWithCommands<Book>("Редактировать книгу",
+							new EditBookTitleCommand("Редактировать название"),
+							new EditBookAuthorCommand("Редактировать автора"),
+							new SubMenuCommand<Book>(
+								new SubMenuWithCommands<Book>("Редактировать страницы",
+									new AddBookPageCommand("Добавить страницу"),
+									new EditBookPageCommand("Редактировать страницу"),
+									new DeleteBookPageCommand("Удалить страницу")))))),
+				wrapper => wrapper.Value),
+			new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(
+				new SubMenuWithCommands<IList<Book>>("Редактировать книгу 2",
+					new SubMenuCommand<IList<Book>>(
+						new BookTitleSubMenuWithListValues(
+							new EditBookTitleCommand("Редактировать название"))),
+					new SubMenuCommand<IList<Book>>(
+						new BookTitleSubMenuWithListValues(
+							new EditBookAuthorCommand("Редактировать автора"))),
+					new SubMenuCommand<IList<Book>>(
+						new BookTitleSubMenuWithListValues(
+							new SubMenuCommand<Book>(
+								new SubMenuWithCommands<Book>("Редактировать страницы",
+									new AddBookPageCommand("Добавить страницу"),
+									new EditBookPageCommand("Редактировать страницу"),
+									new DeleteBookPageCommand("Удалить страницу")))))),
+				wrapper => wrapper.Value));
 	}
 }

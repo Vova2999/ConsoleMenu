@@ -1,5 +1,6 @@
-﻿namespace ConsoleMenu.Core.Logic {
-	public interface ISubMenu<in TValue> : IMenu<TValue> {
-		string Description { get; }
-	}
+﻿namespace ConsoleMenu.Core.Logic;
+
+public interface ISubMenu<in TValue> : IMenu<TValue>
+{
+	string Description { get; }
 }

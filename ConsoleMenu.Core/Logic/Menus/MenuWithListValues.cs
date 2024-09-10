@@ -4,26 +4,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using ConsoleMenu.Core.Helpers;
 
-namespace ConsoleMenu.Core.Logic.Menus {
-	public abstract class MenuWithListValues<TValue> : MenuBase<IList<TValue>> {
-		private readonly ICommand<TValue> _command;
-		private readonly Func<TValue, string> _getValueDescription;
+namespace ConsoleMenu.Core.Logic.Menus;
 
-		protected MenuWithListValues(ICommand<TValue> command, Func<TValue, string> getValueDescription) {
-			_command = command;
-			_getValueDescription = getValueDescription;
-		}
+public abstract class MenuWithListValues<TValue> : MenuBase<IList<TValue>>
+{
+	private readonly ICommand<TValue> _command;
+	private readonly Func<TValue, string> _getValueDescription;
 
-		protected override IEnumerable<string> GetCommandDescriptions(IList<TValue> values) {
-			return values.Select(_getValueDescription);
-		}
+	protected MenuWithListValues(ICommand<TValue> command, Func<TValue, string> getValueDescription)
+	{
+		_command = command;
+		_getValueDescription = getValueDescription;
+	}
 
-		protected override int ReadSelector(IList<TValue> values) {
-			return ConsoleReadHelper.ReadInt(" => ", 0, values.Count);
-		}
+	protected override IEnumerable<string> GetCommandDescriptions(IList<TValue> values)
+	{
+		return values.Select(_getValueDescription);
+	}
 
-		protected override Task ExecuteCommandAsync(IList<TValue> values, int index) {
-			return _command.ExecuteAsync(values[index]);
-		}
+	protected override int ReadSelector(IList<TValue> values)
+	{
+		return ConsoleReadHelper.ReadInt(" => ", 0, values.Count);
+	}
+
+	protected override Task ExecuteCommandAsync(IList<TValue> values, int index)
+	{
+		return _command.ExecuteAsync(values[index]);
 	}
 }

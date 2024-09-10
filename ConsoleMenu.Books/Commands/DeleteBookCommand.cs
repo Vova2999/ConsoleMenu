@@ -8,33 +8,36 @@ using ConsoleMenu.Core;
 using ConsoleMenu.Core.Helpers;
 using ConsoleMenu.Core.Logic;
 
-namespace ConsoleMenu.Books.Commands {
-	public class DeleteBookCommand : ICommand<ValueWrapper<IList<Book>>> {
-		public string Description { get; }
+namespace ConsoleMenu.Books.Commands;
 
-		public DeleteBookCommand(string description) {
-			Description = description;
-		}
+public class DeleteBookCommand : ICommand<ValueWrapper<IList<Book>>>
+{
+	public string Description { get; }
 
-		public Task ExecuteAsync(ValueWrapper<IList<Book>> wrapper) {
-			Console.WriteLine("Введите номер удаляемой книги");
+	public DeleteBookCommand(string description)
+	{
+		Description = description;
+	}
 
-			Console.WriteLine("Вывести книги?");
-			Console.WriteLine("1: Да");
-			Console.WriteLine("0: Нет");
+	public Task ExecuteAsync(ValueWrapper<IList<Book>> wrapper)
+	{
+		Console.WriteLine("Введите номер удаляемой книги");
 
-			var printSelector = ConsoleReadHelper.ReadInt(" => ", 0, 1);
-			if (printSelector == 1)
-				PrintHelper.PrintWithPause(wrapper.Value.Select((book, i) => $"{Environment.NewLine}Книга #{i + 1}{Environment.NewLine}Название: {book.Title}, Автор: {book.Author}, Количество страниц: {book.Pages.Count}"));
+		Console.WriteLine("Вывести книги?");
+		Console.WriteLine("1: Да");
+		Console.WriteLine("0: Нет");
 
-			Console.WriteLine("Введите 0 для отмены");
-			var bookSelector = ConsoleReadHelper.ReadInt(" => ", 0, wrapper.Value.Count);
-			if (bookSelector == 0)
-				return Task.CompletedTask;
+		var printSelector = ConsoleReadHelper.ReadInt(" => ", 0, 1);
+		if (printSelector == 1)
+			PrintHelper.PrintWithPause(wrapper.Value.Select((book, i) => $"{Environment.NewLine}Книга #{i + 1}{Environment.NewLine}Название: {book.Title}, Автор: {book.Author}, Количество страниц: {book.Pages.Count}"));
 
-			wrapper.Value.RemoveAt(bookSelector - 1);
-
+		Console.WriteLine("Введите 0 для отмены");
+		var bookSelector = ConsoleReadHelper.ReadInt(" => ", 0, wrapper.Value.Count);
+		if (bookSelector == 0)
 			return Task.CompletedTask;
-		}
+
+		wrapper.Value.RemoveAt(bookSelector - 1);
+
+		return Task.CompletedTask;
 	}
 }
