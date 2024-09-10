@@ -1,22 +1,18 @@
-﻿using System;
+﻿namespace ConsoleMenu.Core.Logic.Commands;
 
-namespace ConsoleMenu.Core.Logic.Commands;
-
-public class SubMenuCommand<TValue, TSubValue> : ICommand<TValue>
+public class SubMenuCommand<TValue> : ICommand<TValue>
 {
 	public string Description => _subMenu.Description;
 
-	private readonly ISubMenu<TSubValue> _subMenu;
-	private readonly Func<TValue, TSubValue> _selector;
+	private readonly ISubMenu<TValue> _subMenu;
 
-	public SubMenuCommand(ISubMenu<TSubValue> subMenu, Func<TValue, TSubValue> selector)
+	public SubMenuCommand(ISubMenu<TValue> subMenu)
 	{
 		_subMenu = subMenu;
-		_selector = selector;
 	}
 
 	public void Execute(TValue value)
 	{
-		_subMenu.Start(_selector(value));
+		_subMenu.Start(value);
 	}
 }

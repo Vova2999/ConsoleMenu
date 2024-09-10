@@ -1,10 +1,10 @@
 ﻿namespace ConsoleMenu.Core.Logic.Menus.WithCommands;
 
-public class MainMenuWithCommands<TValue> : MenuWithCommands<TValue>, IMenu<TValue>
+public class MainMenuWithCommands : MenuWithCommands, IMenu
 {
 	protected override string BackCommandDescription => "Выход";
 
-	public MainMenuWithCommands(params ICommand<TValue>[] commands) : base(commands)
+	public MainMenuWithCommands(params ICommand[] commands) : base(commands)
 	{
 	}
 }

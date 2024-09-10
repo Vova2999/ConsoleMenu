@@ -4,7 +4,7 @@ namespace ConsoleMenu.Core.Helpers;
 
 public static class ConsoleReadHelper
 {
-	public static int ReadInt(string message, int from, int to)
+	public static int ReadInt(string message, int from = int.MinValue, int to = int.MaxValue)
 	{
 		while (true)
 		{

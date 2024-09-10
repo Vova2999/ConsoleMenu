@@ -1,18 +1,18 @@
 ﻿namespace ConsoleMenu.Core.Logic.Commands;
 
-public class SubMenuCommand<TValue> : ICommand<TValue>
+public class SubMenuCommand : ICommand
 {
 	public string Description => _subMenu.Description;
 
-	private readonly ISubMenu<TValue> _subMenu;
+	private readonly ISubMenu _subMenu;
 
-	public SubMenuCommand(ISubMenu<TValue> subMenu)
+	public SubMenuCommand(ISubMenu subMenu)
 	{
 		_subMenu = subMenu;
 	}
 
-	public void Execute(TValue value)
+	public void Execute()
 	{
-		_subMenu.Start(value);
+		_subMenu.Start();
 	}
 }

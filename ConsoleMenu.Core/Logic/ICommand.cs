@@ -1,7 +1,7 @@
 ﻿namespace ConsoleMenu.Core.Logic;
 
-public interface ICommand<in TValue>
+public interface ICommand
 {
 	string Description { get; }
-	void Execute(TValue value);
+	void Execute();
 }

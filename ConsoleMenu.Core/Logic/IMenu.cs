@@ -1,6 +1,6 @@
 ﻿namespace ConsoleMenu.Core.Logic;
 
-public interface IMenu<in TValue>
+public interface IMenu
 {
-	void Start(TValue value);
+	void Start();
 }

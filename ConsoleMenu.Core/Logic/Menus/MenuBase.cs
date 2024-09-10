@@ -5,36 +5,36 @@ using ConsoleMenu.Core.Extensions;
 
 namespace ConsoleMenu.Core.Logic.Menus;
 
-public abstract class MenuBase<TValue>
+public abstract class MenuBase
 {
 	protected abstract string BackCommandDescription { get; }
 
-	public void Start(TValue value)
+	public void Start()
 	{
 		while (true)
 		{
 			Console.Clear();
-			PrintCommands(value);
+			PrintCommands();
 
-			var selector = ReadSelector(value);
+			var selector = ReadSelector();
 			if (selector == 0)
 				break;
 
-			ExecuteCommand(value, selector - 1);
+			ExecuteCommand(selector - 1);
 		}
 	}
 
-	protected virtual void PrintCommands(TValue value)
+	protected virtual void PrintCommands()
 	{
-		GetCommandDescriptions(value)
+		GetCommandDescriptions()
 			.Select((description, i) => $"{i + 1}: {description}")
 			.Concat($"0: {BackCommandDescription}".AsEnumerable())
 			.ForEach(Console.WriteLine);
 	}
 
-	protected abstract IEnumerable<string> GetCommandDescriptions(TValue value);
+	protected abstract IEnumerable<string> GetCommandDescriptions();
 
-	protected abstract int ReadSelector(TValue value);
+	protected abstract int ReadSelector();
 
-	protected abstract void ExecuteCommand(TValue value, int index);
+	protected abstract void ExecuteCommand(int index);
 }

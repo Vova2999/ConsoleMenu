@@ -17,7 +17,7 @@ public class SubIntCommand : ICommand<ValueWrapper<int>>
 	public void Execute(ValueWrapper<int> wrapper)
 	{
 		Console.Write("Введите число для вычитания");
-		var value = ConsoleReadHelper.ReadInt(" => ", int.MinValue, int.MaxValue);
+		var value = ConsoleReadHelper.ReadInt(" => ");
 
 		wrapper.Value -= value;
 	}

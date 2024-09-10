@@ -17,7 +17,7 @@ public class MulIntCommand : ICommand<ValueWrapper<int>>
 	public void Execute(ValueWrapper<int> wrapper)
 	{
 		Console.Write("Введите число для умножения");
-		var value = ConsoleReadHelper.ReadInt(" => ", int.MinValue, int.MaxValue);
+		var value = ConsoleReadHelper.ReadInt(" => ");
 
 		wrapper.Value *= value;
 	}
