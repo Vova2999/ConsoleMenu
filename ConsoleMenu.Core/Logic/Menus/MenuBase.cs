@@ -7,7 +7,14 @@ namespace ConsoleMenu.Core.Logic.Menus;
 
 public abstract class MenuBase
 {
+	private readonly bool _isBackAfterExecute;
+
 	protected abstract string BackCommandDescription { get; }
+
+	protected MenuBase(bool isBackAfterExecute)
+	{
+		_isBackAfterExecute = isBackAfterExecute;
+	}
 
 	public void Start()
 	{
@@ -21,6 +28,8 @@ public abstract class MenuBase
 				break;
 
 			ExecuteCommand(selector - 1);
+			if (_isBackAfterExecute)
+				break;
 		}
 	}
 

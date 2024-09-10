@@ -23,7 +23,7 @@ public class CarFinder : ICarFinder
 	public IEnumerable<Car> FindByMakeYear(int makeYear)
 	{
 		return carDb.Cars.Where(car => car.MakeYear == makeYear);
-    }
+	}
 
 	public IEnumerable<Car> FindByEngineCapacity(double engineCapacity)
 	{

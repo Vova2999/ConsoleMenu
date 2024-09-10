@@ -10,4 +10,8 @@ public class MainMenuWithListValues<TValue> : MenuWithListValues<TValue>, IMenu<
 	public MainMenuWithListValues(ICommand<TValue> command, Func<TValue, string> getValueDescription) : base(command, getValueDescription)
 	{
 	}
+
+	public MainMenuWithListValues(bool isBackAfterExecute, ICommand<TValue> command, Func<TValue, string> getValueDescription) : base(isBackAfterExecute, command, getValueDescription)
+	{
+	}
 }

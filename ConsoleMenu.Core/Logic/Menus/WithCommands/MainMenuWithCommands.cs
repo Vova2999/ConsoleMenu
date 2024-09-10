@@ -7,4 +7,8 @@ public class MainMenuWithCommands : MenuWithCommands, IMenu
 	public MainMenuWithCommands(params ICommand[] commands) : base(commands)
 	{
 	}
+
+	public MainMenuWithCommands(bool isBackAfterExecute, params ICommand[] commands) : base(isBackAfterExecute, commands)
+	{
+	}
 }

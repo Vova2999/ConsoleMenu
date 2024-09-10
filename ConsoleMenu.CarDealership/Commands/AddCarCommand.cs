@@ -3,6 +3,8 @@ using ConsoleMenu.CarDealership.DataBase;
 using ConsoleMenu.CarDealership.Entities;
 using ConsoleMenu.Core.Logic;
 
+namespace ConsoleMenu.CarDealership.Commands;
+
 public class AddCarCommand : ICommand
 {
 	private readonly ICarDb _carDb;

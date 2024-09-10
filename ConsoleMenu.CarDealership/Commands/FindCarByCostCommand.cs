@@ -5,6 +5,8 @@ using ConsoleMenu.CarDealership.Helpers;
 using ConsoleMenu.CarDealership.Services;
 using ConsoleMenu.Core.Logic;
 
+namespace ConsoleMenu.CarDealership.Commands;
+
 public class FindCarByCostCommand : ICommand
 {
 	private readonly ICarFinder _carFinder;
@@ -27,5 +29,5 @@ public class FindCarByCostCommand : ICommand
 		_carFinder.FindByCost(cost).Select(car => $"Id: {car.Id}, Имя: {car.Name}").ForEach(Console.WriteLine);
 
 		PrintHelper.ReadKeyForContinue();
-    }
-};
+	}
+}

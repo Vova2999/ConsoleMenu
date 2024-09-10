@@ -5,6 +5,8 @@ using ConsoleMenu.CarDealership.Helpers;
 using ConsoleMenu.CarDealership.Services;
 using ConsoleMenu.Core.Logic;
 
+namespace ConsoleMenu.CarDealership.Commands;
+
 public class FindCarByNameCommand : ICommand
 {
 	private readonly ICarFinder _carFinder;
@@ -27,5 +29,5 @@ public class FindCarByNameCommand : ICommand
 		_carFinder.FindByName(name).Select(car => $"Id: {car.Id}, Имя: {car.Name}").ForEach(Console.WriteLine);
 
 		PrintHelper.ReadKeyForContinue();
-    }
-};
+	}
+}

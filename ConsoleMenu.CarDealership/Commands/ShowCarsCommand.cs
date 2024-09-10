@@ -5,6 +5,8 @@ using ConsoleMenu.CarDealership.Extensions;
 using ConsoleMenu.CarDealership.Helpers;
 using ConsoleMenu.Core.Logic;
 
+namespace ConsoleMenu.CarDealership.Commands;
+
 public class ShowCarsCommand : ICommand
 {
 	private readonly ICarDb _carDb;
@@ -24,5 +26,5 @@ public class ShowCarsCommand : ICommand
 			.ForEach(Console.WriteLine);
 
 		PrintHelper.ReadKeyForContinue();
-    }
-};
+	}
+}

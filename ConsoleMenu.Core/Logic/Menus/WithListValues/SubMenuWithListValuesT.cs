@@ -14,6 +14,11 @@ public class SubMenuWithListValues<TValue> : MenuWithListValues<TValue>, ISubMen
 		Description = command.Description;
 	}
 
+	public SubMenuWithListValues(bool isBackAfterExecute, ICommand<TValue> command, Func<TValue, string> getValueDescription) : base(isBackAfterExecute, command, getValueDescription)
+	{
+		Description = command.Description;
+	}
+
 	protected override void PrintCommands(IReadOnlyList<TValue> values)
 	{
 		Console.WriteLine($"<{Description}>");

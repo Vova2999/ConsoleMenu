@@ -8,7 +8,12 @@ public abstract class MenuWithCommands<TValue> : MenuBase<TValue>
 {
 	private readonly ICommand<TValue>[] _commands;
 
-	protected MenuWithCommands(params ICommand<TValue>[] commands)
+	protected MenuWithCommands(params ICommand<TValue>[] commands) : base(false)
+	{
+		_commands = commands;
+	}
+
+	protected MenuWithCommands(bool isBackAfterExecute, params ICommand<TValue>[] commands) : base(isBackAfterExecute)
 	{
 		_commands = commands;
 	}

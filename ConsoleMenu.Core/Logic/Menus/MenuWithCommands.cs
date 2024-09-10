@@ -8,7 +8,12 @@ public abstract class MenuWithCommands : MenuBase
 {
 	private readonly ICommand[] _commands;
 
-	protected MenuWithCommands(params ICommand[] commands)
+	protected MenuWithCommands(params ICommand[] commands) : base(false)
+	{
+		_commands = commands;
+	}
+
+	protected MenuWithCommands(bool isBackAfterExecute, params ICommand[] commands) : base(isBackAfterExecute)
 	{
 		_commands = commands;
 	}

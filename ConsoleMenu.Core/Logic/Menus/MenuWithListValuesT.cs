@@ -10,7 +10,13 @@ public abstract class MenuWithListValues<TValue> : MenuBase<IReadOnlyList<TValue
 	private readonly ICommand<TValue> _command;
 	private readonly Func<TValue, string> _getValueDescription;
 
-	protected MenuWithListValues(ICommand<TValue> command, Func<TValue, string> getValueDescription)
+	protected MenuWithListValues(ICommand<TValue> command, Func<TValue, string> getValueDescription) : base(false)
+	{
+		_command = command;
+		_getValueDescription = getValueDescription;
+	}
+
+	protected MenuWithListValues(bool isBackAfterExecute, ICommand<TValue> command, Func<TValue, string> getValueDescription) : base(isBackAfterExecute)
 	{
 		_command = command;
 		_getValueDescription = getValueDescription;

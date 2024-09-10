@@ -2,6 +2,8 @@
 using ConsoleMenu.CarDealership.Entities;
 using ConsoleMenu.Core.Logic;
 
+namespace ConsoleMenu.CarDealership.Commands;
+
 public class DeleteCarCommand : ICommand<Car>
 {
 	private readonly ICarDb _carDb;

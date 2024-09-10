@@ -14,12 +14,28 @@ public class SubMenuWithCommands<TValue> : MenuWithCommands<TValue>, ISubMenu<TV
 		Description = description;
 	}
 
+	public SubMenuWithCommands(string description, bool isBackAfterExecute, params ICommand<TValue>[] commands) : base(isBackAfterExecute, commands)
+	{
+		Description = description;
+	}
+
 	public SubMenuWithCommands(Func<TValue, string> getDescription, params ICommand<TValue>[] commands) : base(commands)
 	{
 		GetDescription = getDescription;
 	}
 
+	public SubMenuWithCommands(Func<TValue, string> getDescription, bool isBackAfterExecute, params ICommand<TValue>[] commands) : base(isBackAfterExecute, commands)
+	{
+		GetDescription = getDescription;
+	}
+
 	public SubMenuWithCommands(string description, Func<TValue, string> getDescription, params ICommand<TValue>[] commands) : base(commands)
+	{
+		Description = description;
+		GetDescription = getDescription;
+	}
+
+	public SubMenuWithCommands(string description, Func<TValue, string> getDescription, bool isBackAfterExecute, params ICommand<TValue>[] commands) : base(isBackAfterExecute, commands)
 	{
 		Description = description;
 		GetDescription = getDescription;

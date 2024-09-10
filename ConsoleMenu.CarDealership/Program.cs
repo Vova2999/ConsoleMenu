@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using ConsoleMenu.CarDealership.Commands;
 using ConsoleMenu.CarDealership.DataBase;
 using ConsoleMenu.CarDealership.Entities;
 using ConsoleMenu.CarDealership.Extensions;
@@ -70,6 +71,7 @@ public static class Program
 			new AddCarCommand("Добавить новую машину", carDb),
 			new SubMenuConvertCommand<IReadOnlyList<Car>>(
 				new SubMenuWithListValues<Car>(
+					true,
 					new DeleteCarCommand("Удалить машину", carDb),
 					car => car.Name),
 				() => carDb.Cars
