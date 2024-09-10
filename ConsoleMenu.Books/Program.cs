@@ -65,13 +65,13 @@ public static class Program
 	{
 		return new MainMenuWithCommands<ValueWrapper<IList<Book>>>(
 			new ShowBooksCommand("Показать список книг"),
-			new SubMenuConvertCommand<ValueWrapper<IList<Book>>, IReadOnlyList<Book>>(
+			new SubMenuConvertCommand<ValueWrapper<IList<Book>>, IList<Book>>(
 				new BookTitleSubMenuWithListValues(
 					new ShowBookCommand("Показать книгу")),
-				wrapper => (IReadOnlyList<Book>) wrapper.Value),
+				wrapper => wrapper.Value),
 			new AddBookCommand("Добавить книгу"),
 			new DeleteBookCommand("Удалить книгу"),
-			new SubMenuConvertCommand<ValueWrapper<IList<Book>>, IReadOnlyList<Book>>(
+			new SubMenuConvertCommand<ValueWrapper<IList<Book>>, IList<Book>>(
 				new BookTitleSubMenuWithListValues(
 					new SubMenuCommand<Book>(
 						new SubMenuWithCommands<Book>("Редактировать книгу",
@@ -82,22 +82,22 @@ public static class Program
 									new AddBookPageCommand("Добавить страницу"),
 									new EditBookPageCommand("Редактировать страницу"),
 									new DeleteBookPageCommand("Удалить страницу")))))),
-				wrapper => (IReadOnlyList<Book>) wrapper.Value),
-			new SubMenuConvertCommand<ValueWrapper<IList<Book>>, IReadOnlyList<Book>>(
-				new SubMenuWithCommands<IReadOnlyList<Book>>("Редактировать книгу 2",
-					new SubMenuCommand<IReadOnlyList<Book>>(
+				wrapper => wrapper.Value),
+			new SubMenuConvertCommand<ValueWrapper<IList<Book>>, IList<Book>>(
+				new SubMenuWithCommands<IList<Book>>("Редактировать книгу 2",
+					new SubMenuCommand<IList<Book>>(
 						new BookTitleSubMenuWithListValues(
 							new EditBookTitleCommand("Редактировать название"))),
-					new SubMenuCommand<IReadOnlyList<Book>>(
+					new SubMenuCommand<IList<Book>>(
 						new BookTitleSubMenuWithListValues(
 							new EditBookAuthorCommand("Редактировать автора"))),
-					new SubMenuCommand<IReadOnlyList<Book>>(
+					new SubMenuCommand<IList<Book>>(
 						new BookTitleSubMenuWithListValues(
 							new SubMenuCommand<Book>(
 								new SubMenuWithCommands<Book>("Редактировать страницы",
 									new AddBookPageCommand("Добавить страницу"),
 									new EditBookPageCommand("Редактировать страницу"),
 									new DeleteBookPageCommand("Удалить страницу")))))),
-				wrapper => (IReadOnlyList<Book>) wrapper.Value));
+				wrapper => wrapper.Value));
 	}
 }

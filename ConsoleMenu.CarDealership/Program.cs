@@ -80,13 +80,13 @@ public static class Program
 			new FindCarByMakeYearCommand("Поиск по году выпуска", carFinder),
 			new FindCarByEngineCapacityCommand("Поиск по мощности двигателя", carFinder),
 			new FindCarByCostCommand("Поиск по стоимости", carFinder),
-			new SubMenuConvertCommand<IReadOnlyList<int>>(
+			new SubMenuConvertCommand<IEnumerable<int>>(
 				new SubMenuWithListValues<int>(
-					new SelectCommand<int, IReadOnlyList<Car>>(
+					new SelectCommand<int, IEnumerable<Car>>(
 						new ShowSelectedCarsCommand("Показать машины по году выпуска"),
-						makeYear => carDb.Cars.Where(c => c.MakeYear == makeYear).ToList()),
+						makeYear => carDb.Cars.Where(c => c.MakeYear == makeYear)),
 					makeYear => makeYear.ToString()),
-				() => carDb.Cars.Select(c => c.MakeYear).Distinct().OrderBy(x => x).ToList()
+				() => carDb.Cars.Select(c => c.MakeYear).Distinct().OrderBy(x => x)
 			));
 	}
 }

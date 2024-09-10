@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ConsoleMenu.Core.Logic.Menus.WithListValues;
 
-public class SubMenuWithListValues<TValue> : MenuWithListValues<TValue>, ISubMenu<IReadOnlyList<TValue>>
+public class SubMenuWithListValues<TValue> : MenuWithListValues<TValue>, ISubMenu<IEnumerable<TValue>>
 {
 	protected override string BackCommandDescription => "Назад";
 
@@ -19,7 +19,7 @@ public class SubMenuWithListValues<TValue> : MenuWithListValues<TValue>, ISubMen
 		Description = command.Description;
 	}
 
-	protected override void PrintCommands(IReadOnlyList<TValue> values)
+	protected override void PrintCommands(IEnumerable<TValue> values)
 	{
 		Console.WriteLine($"<{Description}>");
 		base.PrintCommands(values);

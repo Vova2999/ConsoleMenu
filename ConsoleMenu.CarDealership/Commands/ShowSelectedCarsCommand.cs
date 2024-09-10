@@ -8,7 +8,7 @@ using ConsoleMenu.Core.Logic;
 
 namespace ConsoleMenu.CarDealership.Commands;
 
-public class ShowSelectedCarsCommand : ICommand<IReadOnlyList<Car>>
+public class ShowSelectedCarsCommand : ICommand<IEnumerable<Car>>
 {
 	public string Description { get; }
 
@@ -17,7 +17,7 @@ public class ShowSelectedCarsCommand : ICommand<IReadOnlyList<Car>>
 		Description = description;
 	}
 
-	public void Execute(IReadOnlyList<Car> value)
+	public void Execute(IEnumerable<Car> value)
 	{
 		value
             .Select(car => $"Id: {car.Id}, Имя: {car.Name}, Год выпуска: {car.MakeYear}, Мощность двигателя: {car.EngineCapacity}, Стоимость: {car.Cost}")
