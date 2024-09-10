@@ -9,10 +9,11 @@ public class FindCarByEngineCapacityCommand : ICommand
 {
 	private readonly ICarFinder _carFinder;
 
-	public string Description => "Поиск по мощности двигателя";
+	public string Description { get; }
 
-	public FindCarByEngineCapacityCommand(ICarFinder carFinder)
+	public FindCarByEngineCapacityCommand(string description, ICarFinder carFinder)
 	{
+		Description = description;
 		_carFinder = carFinder;
 	}
 

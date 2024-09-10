@@ -8,7 +8,9 @@ using ConsoleMenu.CarDealership.Extensions;
 using ConsoleMenu.CarDealership.Helpers;
 using ConsoleMenu.CarDealership.Services;
 using ConsoleMenu.Core.Logic;
+using ConsoleMenu.Core.Logic.Commands;
 using ConsoleMenu.Core.Logic.Menus.WithCommands;
+using ConsoleMenu.Core.Logic.Menus.WithListValues;
 
 namespace ConsoleMenu.CarDealership;
 
@@ -64,12 +66,17 @@ public static class Program
 	private static IMenu CreateMenu(ICarDb carDb, ICarFinder carFinder)
 	{
 		return new MainMenuWithCommands(
-			new ShowCarsCommand(carDb),
-			new AddCarCommand(carDb),
-			new DeleteCarCommand(carDb),
-			new FindCarByNameCommand(carFinder),
-			new FindCarByMakeYearCommand(carFinder),
-			new FindCarByEngineCapacityCommand(carFinder),
-			new FindCarByCostCommand(carFinder));
+			new ShowCarsCommand("Показать все машины", carDb),
+			new AddCarCommand("Добавить новую машину", carDb),
+			new SubMenuConvertCommand<IReadOnlyList<Car>>(
+				new SubMenuWithListValues<Car>(
+					new DeleteCarCommand("Удалить машину", carDb),
+					car => car.Name),
+				() => carDb.Cars
+			),
+			new FindCarByNameCommand("Поиск по имени", carFinder),
+			new FindCarByMakeYearCommand("Поиск по году выпуска", carFinder),
+			new FindCarByEngineCapacityCommand("Поиск по мощности двигателя", carFinder),
+			new FindCarByCostCommand("Поиск по стоимости", carFinder));
 	}
 }

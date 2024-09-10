@@ -1,30 +1,21 @@
-﻿using System;
-using System.Linq;
-using ConsoleMenu.CarDealership.DataBase;
-using ConsoleMenu.CarDealership.Extensions;
-using ConsoleMenu.Core.Helpers;
+﻿using ConsoleMenu.CarDealership.DataBase;
+using ConsoleMenu.CarDealership.Entities;
 using ConsoleMenu.Core.Logic;
 
-public class DeleteCarCommand : ICommand
+public class DeleteCarCommand : ICommand<Car>
 {
 	private readonly ICarDb _carDb;
 
-	public string Description => "Удалить существующую машину";
+	public string Description { get; }
 
-	public DeleteCarCommand(ICarDb carDb)
+	public DeleteCarCommand(string description, ICarDb carDb)
 	{
+		Description = description;
 		_carDb = carDb;
 	}
 
-	public void Execute()
+	public void Execute(Car car)
 	{
-		_carDb.Cars.Select((car, i) => $"{i}: {car.Name}").ForEach(Console.WriteLine);
-		Console.WriteLine("0: Назад");
-
-		var selector = ConsoleReadHelper.ReadInt(" => ", 0, _carDb.Cars.Count);
-		if (selector == 0)
-			return;
-
-		_carDb.Delete(_carDb.Cars[selector - 1]);
+		_carDb.Delete(car);
 	}
-};
+}

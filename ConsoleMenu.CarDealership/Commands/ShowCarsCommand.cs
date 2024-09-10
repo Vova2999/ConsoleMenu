@@ -9,10 +9,11 @@ public class ShowCarsCommand : ICommand
 {
 	private readonly ICarDb _carDb;
 
-	public string Description => "Показать все машины";
+	public string Description { get; }
 
-	public ShowCarsCommand(ICarDb carDb)
+	public ShowCarsCommand(string description, ICarDb carDb)
 	{
+		Description = description;
 		_carDb = carDb;
 	}
 

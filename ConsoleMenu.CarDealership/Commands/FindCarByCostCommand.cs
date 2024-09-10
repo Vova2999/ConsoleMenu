@@ -9,10 +9,11 @@ public class FindCarByCostCommand : ICommand
 {
 	private readonly ICarFinder _carFinder;
 
-	public string Description => "Поиск по стоимости";
+	public string Description { get; }
 
-	public FindCarByCostCommand(ICarFinder carFinder)
+	public FindCarByCostCommand(string description, ICarFinder carFinder)
 	{
+		Description = description;
 		_carFinder = carFinder;
 	}
 

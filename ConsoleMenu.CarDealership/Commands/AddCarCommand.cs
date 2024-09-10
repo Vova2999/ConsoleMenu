@@ -7,10 +7,11 @@ public class AddCarCommand : ICommand
 {
 	private readonly ICarDb _carDb;
 
-	public string Description => "Добавить новую машину";
+	public string Description { get; }
 
-	public AddCarCommand(ICarDb carDb)
+	public AddCarCommand(string description, ICarDb carDb)
 	{
+		Description = description;
 		_carDb = carDb;
 	}
 

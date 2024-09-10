@@ -9,10 +9,11 @@ public class FindCarByMakeYearCommand : ICommand
 {
 	private readonly ICarFinder _carFinder;
 
-	public string Description => "Поиск по году выпуска";
+	public string Description { get; }
 
-	public FindCarByMakeYearCommand(ICarFinder carFinder)
+	public FindCarByMakeYearCommand(string description, ICarFinder carFinder)
 	{
+		Description = description;
 		_carFinder = carFinder;
 	}
 

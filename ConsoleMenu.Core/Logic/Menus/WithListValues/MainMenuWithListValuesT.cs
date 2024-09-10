@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ConsoleMenu.Core.Logic.Menus.WithListValues;
 
-public class MainMenuWithListValues<TValue> : MenuWithListValues<TValue>, IMenu<IList<TValue>>
+public class MainMenuWithListValues<TValue> : MenuWithListValues<TValue>, IMenu<IReadOnlyList<TValue>>
 {
 	protected override string BackCommandDescription => "Выход";
 
