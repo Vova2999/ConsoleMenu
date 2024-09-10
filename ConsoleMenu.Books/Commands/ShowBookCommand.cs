@@ -5,26 +5,29 @@ using ConsoleMenu.Books.Helpers;
 using ConsoleMenu.Core.Helpers;
 using ConsoleMenu.Core.Logic;
 
-namespace ConsoleMenu.Books.Commands {
-	public class ShowBookCommand : ICommand<Book> {
-		public string Description { get; }
+namespace ConsoleMenu.Books.Commands;
 
-		public ShowBookCommand(string description) {
-			Description = description;
-		}
+public class ShowBookCommand : ICommand<Book>
+{
+	public string Description { get; }
 
-		public void Execute(Book book) {
-			Console.WriteLine($"Название: {book.Title}, Автор: {book.Author}, Количество страниц: {book.Pages.Count}");
+	public ShowBookCommand(string description)
+	{
+		Description = description;
+	}
 
-			Console.WriteLine("Вывести страницы?");
-			Console.WriteLine("1: Да");
-			Console.WriteLine("0: Нет");
+	public void Execute(Book book)
+	{
+		Console.WriteLine($"Название: {book.Title}, Автор: {book.Author}, Количество страниц: {book.Pages.Count}");
 
-			var printSelector = ConsoleReadHelper.ReadInt(" => ", 0, 1);
-			if (printSelector == 1)
-				PrintHelper.PrintWithPause(book.Pages.Select((page, i) => $"{Environment.NewLine}Страница #{i + 1}{Environment.NewLine}{page}"));
+		Console.WriteLine("Вывести страницы?");
+		Console.WriteLine("1: Да");
+		Console.WriteLine("0: Нет");
 
-			PrintHelper.ReadKeyForContinue();
-		}
+		var printSelector = ConsoleReadHelper.ReadInt(" => ", 0, 1);
+		if (printSelector == 1)
+			PrintHelper.PrintWithPause(book.Pages.Select((page, i) => $"{Environment.NewLine}Страница #{i + 1}{Environment.NewLine}{page}"));
+
+		PrintHelper.ReadKeyForContinue();
 	}
 }

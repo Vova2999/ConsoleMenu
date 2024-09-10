@@ -2,24 +2,29 @@
 using System.Linq;
 using ConsoleMenu.Core.Helpers;
 
-namespace ConsoleMenu.Core.Logic.Menus {
-	public abstract class MenuWithCommands<TValue> : MenuBase<TValue> {
-		private readonly ICommand<TValue>[] _commands;
+namespace ConsoleMenu.Core.Logic.Menus;
 
-		protected MenuWithCommands(params ICommand<TValue>[] commands) {
-			_commands = commands;
-		}
+public abstract class MenuWithCommands<TValue> : MenuBase<TValue>
+{
+	private readonly ICommand<TValue>[] _commands;
 
-		protected override IEnumerable<string> GetCommandDescriptions(TValue value) {
-			return _commands.Select(command => command.Description);
-		}
+	protected MenuWithCommands(params ICommand<TValue>[] commands)
+	{
+		_commands = commands;
+	}
 
-		protected override int ReadSelector(TValue value) {
-			return ConsoleReadHelper.ReadInt(" => ", 0, _commands.Length);
-		}
+	protected override IEnumerable<string> GetCommandDescriptions(TValue value)
+	{
+		return _commands.Select(command => command.Description);
+	}
 
-		protected override void ExecuteCommand(TValue value, int index) {
-			_commands[index].Execute(value);
-		}
+	protected override int ReadSelector(TValue value)
+	{
+		return ConsoleReadHelper.ReadInt(" => ", 0, _commands.Length);
+	}
+
+	protected override void ExecuteCommand(TValue value, int index)
+	{
+		_commands[index].Execute(value);
 	}
 }

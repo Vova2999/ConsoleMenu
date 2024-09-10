@@ -5,31 +5,34 @@ using ConsoleMenu.Books.Helpers;
 using ConsoleMenu.Core.Helpers;
 using ConsoleMenu.Core.Logic;
 
-namespace ConsoleMenu.Books.Commands.EditBookPages {
-	public class DeleteBookPageCommand : ICommand<Book> {
-		public string Description { get; }
+namespace ConsoleMenu.Books.Commands.EditBookPages;
 
-		public DeleteBookPageCommand(string description) {
-			Description = description;
-		}
+public class DeleteBookPageCommand : ICommand<Book>
+{
+	public string Description { get; }
 
-		public void Execute(Book book) {
-			Console.WriteLine("Введите номер удаляемой страницы");
+	public DeleteBookPageCommand(string description)
+	{
+		Description = description;
+	}
 
-			Console.WriteLine("Вывести страницы?");
-			Console.WriteLine("1: Да");
-			Console.WriteLine("0: Нет");
+	public void Execute(Book book)
+	{
+		Console.WriteLine("Введите номер удаляемой страницы");
 
-			var printSelector = ConsoleReadHelper.ReadInt(" => ", 0, 1);
-			if (printSelector == 1)
-				PrintHelper.PrintWithPause(book.Pages.Select((page, i) => $"{Environment.NewLine}Страница #{i + 1}{Environment.NewLine}{page}"));
+		Console.WriteLine("Вывести страницы?");
+		Console.WriteLine("1: Да");
+		Console.WriteLine("0: Нет");
 
-			Console.WriteLine("Введите 0 для отмены");
-			var pageSelector = ConsoleReadHelper.ReadInt(" => ", 0, book.Pages.Count);
-			if (pageSelector == 0)
-				return;
+		var printSelector = ConsoleReadHelper.ReadInt(" => ", 0, 1);
+		if (printSelector == 1)
+			PrintHelper.PrintWithPause(book.Pages.Select((page, i) => $"{Environment.NewLine}Страница #{i + 1}{Environment.NewLine}{page}"));
 
-			book.Pages.RemoveAt(pageSelector - 1);
-		}
+		Console.WriteLine("Введите 0 для отмены");
+		var pageSelector = ConsoleReadHelper.ReadInt(" => ", 0, book.Pages.Count);
+		if (pageSelector == 0)
+			return;
+
+		book.Pages.RemoveAt(pageSelector - 1);
 	}
 }

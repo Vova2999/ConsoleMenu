@@ -6,18 +6,21 @@ using ConsoleMenu.Books.Helpers;
 using ConsoleMenu.Core;
 using ConsoleMenu.Core.Logic;
 
-namespace ConsoleMenu.Books.Commands {
-	public class ShowBooksCommand : ICommand<ValueWrapper<IList<Book>>> {
-		public string Description { get; }
+namespace ConsoleMenu.Books.Commands;
 
-		public ShowBooksCommand(string description) {
-			Description = description;
-		}
+public class ShowBooksCommand : ICommand<ValueWrapper<IList<Book>>>
+{
+	public string Description { get; }
 
-		public void Execute(ValueWrapper<IList<Book>> wrapper) {
-			PrintHelper.PrintWithPause(wrapper.Value.Select((book, i) => $"{Environment.NewLine}Книга #{i + 1}{Environment.NewLine}Название: {book.Title}, Автор: {book.Author}, Количество страниц: {book.Pages.Count}"), 10);
+	public ShowBooksCommand(string description)
+	{
+		Description = description;
+	}
 
-			PrintHelper.ReadKeyForContinue();
-		}
+	public void Execute(ValueWrapper<IList<Book>> wrapper)
+	{
+		PrintHelper.PrintWithPause(wrapper.Value.Select((book, i) => $"{Environment.NewLine}Книга #{i + 1}{Environment.NewLine}Название: {book.Title}, Автор: {book.Author}, Количество страниц: {book.Pages.Count}"), 10);
+
+		PrintHelper.ReadKeyForContinue();
 	}
 }

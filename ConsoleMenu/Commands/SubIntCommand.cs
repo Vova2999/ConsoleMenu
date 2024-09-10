@@ -3,19 +3,22 @@ using ConsoleMenu.Core;
 using ConsoleMenu.Core.Helpers;
 using ConsoleMenu.Core.Logic;
 
-namespace ConsoleMenu.Commands {
-	public class SubIntCommand : ICommand<ValueWrapper<int>> {
-		public string Description { get; }
+namespace ConsoleMenu.Commands;
 
-		public SubIntCommand(string description) {
-			Description = description;
-		}
+public class SubIntCommand : ICommand<ValueWrapper<int>>
+{
+	public string Description { get; }
 
-		public void Execute(ValueWrapper<int> wrapper) {
-			Console.Write("Введите число для вычитания");
-			var value = ConsoleReadHelper.ReadInt(" => ", int.MinValue, int.MaxValue);
+	public SubIntCommand(string description)
+	{
+		Description = description;
+	}
 
-			wrapper.Value -= value;
-		}
+	public void Execute(ValueWrapper<int> wrapper)
+	{
+		Console.Write("Введите число для вычитания");
+		var value = ConsoleReadHelper.ReadInt(" => ", int.MinValue, int.MaxValue);
+
+		wrapper.Value -= value;
 	}
 }
