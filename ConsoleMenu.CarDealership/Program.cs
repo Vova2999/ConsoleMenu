@@ -87,6 +87,18 @@ public static class Program
 						makeYear => carDb.Cars.Where(c => c.MakeYear == makeYear)),
 					makeYear => makeYear.ToString()),
 				() => carDb.Cars.Select(c => c.MakeYear).Distinct().OrderBy(x => x)
+			),
+			new SubMenuConvertCommand<IEnumerable<int>>(
+				new SubMenuWithListValues<int>(
+					new SubMenuConvertCommand<int, IEnumerable<Car>>(
+						new SubMenuWithCommands<IEnumerable<Car>>(
+							"Редактирование машин по году выпуска",
+							cars => $"Редактирование машин с годом выпуска {cars.First().MakeYear}",
+							new ShowSelectedCarsCommand("Показать машины"),
+							new DeleteSelectedCarsCommand("Удалить машины", carDb, true)),
+						makeYear => carDb.Cars.Where(c => c.MakeYear == makeYear)),
+					makeYear => makeYear.ToString()),
+				() => carDb.Cars.Select(c => c.MakeYear).Distinct().OrderBy(x => x)
 			));
 	}
 }

@@ -12,10 +12,12 @@ namespace ConsoleMenu.Books.Commands;
 public class DeleteBookCommand : ICommand<ValueWrapper<IList<Book>>>
 {
 	public string Description { get; }
+	public bool IsBackAfterExecute { get; }
 
-	public DeleteBookCommand(string description)
+	public DeleteBookCommand(string description, bool isBackAfterExecute = false)
 	{
 		Description = description;
+		IsBackAfterExecute = isBackAfterExecute;
 	}
 
 	public void Execute(ValueWrapper<IList<Book>> wrapper)

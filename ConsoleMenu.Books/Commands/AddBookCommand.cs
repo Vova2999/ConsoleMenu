@@ -9,10 +9,12 @@ namespace ConsoleMenu.Books.Commands;
 public class AddBookCommand : ICommand<ValueWrapper<IList<Book>>>
 {
 	public string Description { get; }
+	public bool IsBackAfterExecute { get; }
 
-	public AddBookCommand(string description)
+	public AddBookCommand(string description, bool isBackAfterExecute = false)
 	{
 		Description = description;
+		IsBackAfterExecute = isBackAfterExecute;
 	}
 
 	public void Execute(ValueWrapper<IList<Book>> wrapper)

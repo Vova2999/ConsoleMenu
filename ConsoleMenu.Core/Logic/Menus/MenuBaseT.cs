@@ -11,7 +11,7 @@ public abstract class MenuBase<TValue>
 
 	protected abstract string BackCommandDescription { get; }
 
-	protected MenuBase(bool isBackAfterExecute)
+	protected MenuBase(bool isBackAfterExecute = false)
 	{
 		_isBackAfterExecute = isBackAfterExecute;
 	}
@@ -28,7 +28,7 @@ public abstract class MenuBase<TValue>
 				break;
 
 			ExecuteCommand(value, selector - 1);
-			if (_isBackAfterExecute)
+			if (_isBackAfterExecute || IsBackAfterExecuteCommand(selector - 1))
 				break;
 		}
 	}
@@ -46,4 +46,6 @@ public abstract class MenuBase<TValue>
 	protected abstract int ReadSelector(TValue value);
 
 	protected abstract void ExecuteCommand(TValue value, int index);
+
+	protected abstract bool IsBackAfterExecuteCommand(int index);
 }

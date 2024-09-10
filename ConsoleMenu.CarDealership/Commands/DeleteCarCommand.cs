@@ -9,11 +9,13 @@ public class DeleteCarCommand : ICommand<Car>
 	private readonly ICarDb _carDb;
 
 	public string Description { get; }
+	public bool IsBackAfterExecute { get; }
 
-	public DeleteCarCommand(string description, ICarDb carDb)
+	public DeleteCarCommand(string description, ICarDb carDb, bool isBackAfterExecute = false)
 	{
 		Description = description;
 		_carDb = carDb;
+		IsBackAfterExecute = isBackAfterExecute;
 	}
 
 	public void Execute(Car car)

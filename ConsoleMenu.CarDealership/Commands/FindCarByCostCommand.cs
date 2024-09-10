@@ -12,11 +12,13 @@ public class FindCarByCostCommand : ICommand
 	private readonly ICarFinder _carFinder;
 
 	public string Description { get; }
+	public bool IsBackAfterExecute { get; }
 
-	public FindCarByCostCommand(string description, ICarFinder carFinder)
+	public FindCarByCostCommand(string description, ICarFinder carFinder, bool isBackAfterExecute = false)
 	{
 		Description = description;
 		_carFinder = carFinder;
+		IsBackAfterExecute = isBackAfterExecute;
 	}
 
 	public void Execute()

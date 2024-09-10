@@ -12,11 +12,13 @@ public class FindCarByMakeYearCommand : ICommand
 	private readonly ICarFinder _carFinder;
 
 	public string Description { get; }
+	public bool IsBackAfterExecute { get; }
 
-	public FindCarByMakeYearCommand(string description, ICarFinder carFinder)
+	public FindCarByMakeYearCommand(string description, ICarFinder carFinder, bool isBackAfterExecute = false)
 	{
 		Description = description;
 		_carFinder = carFinder;
+		IsBackAfterExecute = isBackAfterExecute;
 	}
 
 	public void Execute()

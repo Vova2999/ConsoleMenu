@@ -8,10 +8,12 @@ namespace ConsoleMenu.Commands;
 public class SubIntCommand : ICommand<ValueWrapper<int>>
 {
 	public string Description { get; }
+	public bool IsBackAfterExecute { get; }
 
-	public SubIntCommand(string description)
+	public SubIntCommand(string description, bool isBackAfterExecute = false)
 	{
 		Description = description;
+		IsBackAfterExecute = isBackAfterExecute;
 	}
 
 	public void Execute(ValueWrapper<int> wrapper)

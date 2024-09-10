@@ -12,10 +12,12 @@ namespace ConsoleMenu.Books.Commands.EditBookPages;
 public class AddBookPageCommand : ICommand<Book>
 {
 	public string Description { get; }
+	public bool IsBackAfterExecute { get; }
 
-	public AddBookPageCommand(string description)
+	public AddBookPageCommand(string description, bool isBackAfterExecute = false)
 	{
 		Description = description;
+		IsBackAfterExecute = isBackAfterExecute;
 	}
 
 	public void Execute(Book book)

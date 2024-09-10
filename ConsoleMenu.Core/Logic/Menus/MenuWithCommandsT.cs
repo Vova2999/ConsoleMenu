@@ -8,7 +8,7 @@ public abstract class MenuWithCommands<TValue> : MenuBase<TValue>
 {
 	private readonly ICommand<TValue>[] _commands;
 
-	protected MenuWithCommands(params ICommand<TValue>[] commands) : base(false)
+	protected MenuWithCommands(params ICommand<TValue>[] commands)
 	{
 		_commands = commands;
 	}
@@ -31,5 +31,10 @@ public abstract class MenuWithCommands<TValue> : MenuBase<TValue>
 	protected override void ExecuteCommand(TValue value, int index)
 	{
 		_commands[index].Execute(value);
+	}
+
+	protected override bool IsBackAfterExecuteCommand(int index)
+	{
+		return _commands[index].IsBackAfterExecute;
 	}
 }

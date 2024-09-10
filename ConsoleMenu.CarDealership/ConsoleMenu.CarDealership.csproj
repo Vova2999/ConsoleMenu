@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Commands\AddCarCommand.cs" />
     <Compile Include="Commands\DeleteCarCommand.cs" />
+    <Compile Include="Commands\DeleteSelectedCarsCommand.cs" />
     <Compile Include="Commands\FindCarByCostCommand.cs" />
     <Compile Include="Commands\FindCarByEngineCapacityCommand.cs" />
     <Compile Include="Commands\FindCarByMakeYearCommand.cs" />

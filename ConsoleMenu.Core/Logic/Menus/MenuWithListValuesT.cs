@@ -10,7 +10,7 @@ public abstract class MenuWithListValues<TValue> : MenuBase<IEnumerable<TValue>>
 	private readonly ICommand<TValue> _command;
 	private readonly Func<TValue, string> _getValueDescription;
 
-	protected MenuWithListValues(ICommand<TValue> command, Func<TValue, string> getValueDescription) : base(false)
+	protected MenuWithListValues(ICommand<TValue> command, Func<TValue, string> getValueDescription)
 	{
 		_command = command;
 		_getValueDescription = getValueDescription;
@@ -35,5 +35,10 @@ public abstract class MenuWithListValues<TValue> : MenuBase<IEnumerable<TValue>>
 	protected override void ExecuteCommand(IEnumerable<TValue> values, int index)
 	{
 		_command.Execute(values.ElementAt(index));
+	}
+
+	protected override bool IsBackAfterExecuteCommand(int index)
+	{
+		return _command.IsBackAfterExecute;
 	}
 }

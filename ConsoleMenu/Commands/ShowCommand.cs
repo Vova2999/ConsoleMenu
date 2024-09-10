@@ -7,10 +7,12 @@ namespace ConsoleMenu.Commands;
 public class ShowCommand<TValue> : ICommand<ValueWrapper<TValue>>
 {
 	public string Description { get; }
+	public bool IsBackAfterExecute { get; }
 
-	public ShowCommand(string description)
+	public ShowCommand(string description, bool isBackAfterExecute = false)
 	{
 		Description = description;
+		IsBackAfterExecute = isBackAfterExecute;
 	}
 
 	public void Execute(ValueWrapper<TValue> wrapper)

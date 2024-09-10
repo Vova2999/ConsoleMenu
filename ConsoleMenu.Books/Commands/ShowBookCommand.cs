@@ -10,10 +10,12 @@ namespace ConsoleMenu.Books.Commands;
 public class ShowBookCommand : ICommand<Book>
 {
 	public string Description { get; }
+	public bool IsBackAfterExecute { get; }
 
-	public ShowBookCommand(string description)
+	public ShowBookCommand(string description, bool isBackAfterExecute = false)
 	{
 		Description = description;
+		IsBackAfterExecute = isBackAfterExecute;
 	}
 
 	public void Execute(Book book)

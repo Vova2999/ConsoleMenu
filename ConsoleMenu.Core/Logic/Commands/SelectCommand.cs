@@ -5,6 +5,7 @@ namespace ConsoleMenu.Core.Logic.Commands;
 public class SelectCommand<TSubValue> : ICommand
 {
 	public string Description => _command.Description;
+	public bool IsBackAfterExecute => _command.IsBackAfterExecute;
 
 	private readonly ICommand<TSubValue> _command;
 	private readonly Func<TSubValue> _selector;

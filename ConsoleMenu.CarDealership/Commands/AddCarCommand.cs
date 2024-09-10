@@ -10,11 +10,13 @@ public class AddCarCommand : ICommand
 	private readonly ICarDb _carDb;
 
 	public string Description { get; }
+	public bool IsBackAfterExecute { get; }
 
-	public AddCarCommand(string description, ICarDb carDb)
+	public AddCarCommand(string description, ICarDb carDb, bool isBackAfterExecute = false)
 	{
 		Description = description;
 		_carDb = carDb;
+		IsBackAfterExecute = isBackAfterExecute;
 	}
 
 	public void Execute()

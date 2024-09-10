@@ -8,7 +8,7 @@ public abstract class MenuWithCommands : MenuBase
 {
 	private readonly ICommand[] _commands;
 
-	protected MenuWithCommands(params ICommand[] commands) : base(false)
+	protected MenuWithCommands(params ICommand[] commands)
 	{
 		_commands = commands;
 	}
@@ -31,5 +31,10 @@ public abstract class MenuWithCommands : MenuBase
 	protected override void ExecuteCommand(int index)
 	{
 		_commands[index].Execute();
+	}
+
+	protected override bool IsBackAfterExecuteCommand(int index)
+	{
+		return _commands[index].IsBackAfterExecute;
 	}
 }
