@@ -18,7 +18,7 @@ public static class Program
 {
 	private const string BooksFileName = "Books.xml";
 
-	public static void Main(string[] args)
+	public static void Main()
 	{
 		try
 		{
