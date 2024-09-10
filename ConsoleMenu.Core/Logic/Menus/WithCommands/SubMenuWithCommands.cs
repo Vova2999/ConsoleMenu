@@ -2,32 +2,48 @@
 
 namespace ConsoleMenu.Core.Logic.Menus.WithCommands;
 
-public class SubMenuWithCommands<TValue> : MenuWithCommands<TValue>, ISubMenu<TValue>
+public class SubMenuWithCommands : MenuWithCommands, ISubMenu
 {
 	protected override string BackCommandDescription => "Назад";
 
 	public string Description { get; }
-	public Func<TValue, string> GetDescription { get; }
+	public Func<string> GetDescription { get; }
 
-	public SubMenuWithCommands(string description, params ICommand<TValue>[] commands) : base(commands)
+	public SubMenuWithCommands(string description, params ICommand[] commands) : base(commands)
 	{
 		Description = description;
 	}
 
-	public SubMenuWithCommands(Func<TValue, string> getDescription, params ICommand<TValue>[] commands) : base(commands)
+	public SubMenuWithCommands(string description, bool isBackAfterExecute, params ICommand[] commands) : base(isBackAfterExecute, commands)
+	{
+		Description = description;
+	}
+
+	public SubMenuWithCommands(Func<string> getDescription, params ICommand[] commands) : base(commands)
 	{
 		GetDescription = getDescription;
 	}
 
-	public SubMenuWithCommands(string description, Func<TValue, string> getDescription, params ICommand<TValue>[] commands) : base(commands)
+	public SubMenuWithCommands(Func<string> getDescription, bool isBackAfterExecute, params ICommand[] commands) : base(isBackAfterExecute, commands)
+	{
+		GetDescription = getDescription;
+	}
+
+	public SubMenuWithCommands(string description, Func<string> getDescription, params ICommand[] commands) : base(commands)
 	{
 		Description = description;
 		GetDescription = getDescription;
 	}
 
-	protected override void PrintCommands(TValue value)
+	public SubMenuWithCommands(string description, Func<string> getDescription, bool isBackAfterExecute, params ICommand[] commands) : base(isBackAfterExecute, commands)
 	{
-		Console.WriteLine($"<{GetDescription?.Invoke(value) ?? Description}>");
-		base.PrintCommands(value);
+		Description = description;
+		GetDescription = getDescription;
+	}
+
+	protected override void PrintCommands()
+	{
+		Console.WriteLine($"<{GetDescription?.Invoke() ?? Description}>");
+		base.PrintCommands();
 	}
 }

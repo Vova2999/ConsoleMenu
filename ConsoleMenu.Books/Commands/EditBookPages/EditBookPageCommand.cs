@@ -13,10 +13,12 @@ namespace ConsoleMenu.Books.Commands.EditBookPages;
 public class EditBookPageCommand : ICommand<Book>
 {
 	public string Description { get; }
+	public bool IsBackAfterExecute { get; }
 
-	public EditBookPageCommand(string description)
+	public EditBookPageCommand(string description, bool isBackAfterExecute = false)
 	{
 		Description = description;
+		IsBackAfterExecute = isBackAfterExecute;
 	}
 
 	public Task ExecuteAsync(Book book)

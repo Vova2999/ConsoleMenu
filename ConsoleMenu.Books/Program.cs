@@ -18,7 +18,7 @@ public static class Program
 {
 	private const string BooksFileName = "Books.xml";
 
-	public static void Main(string[] args)
+	public static void Main()
 	{
 		try
 		{
@@ -65,13 +65,13 @@ public static class Program
 	{
 		return new MainMenuWithCommands<ValueWrapper<IList<Book>>>(
 			new ShowBooksCommand("Показать список книг"),
-			new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(
+			new SubMenuConvertCommand<ValueWrapper<IList<Book>>, IList<Book>>(
 				new BookTitleSubMenuWithListValues(
 					new ShowBookCommand("Показать книгу")),
 				wrapper => wrapper.Value),
 			new AddBookCommand("Добавить книгу"),
 			new DeleteBookCommand("Удалить книгу"),
-			new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(
+			new SubMenuConvertCommand<ValueWrapper<IList<Book>>, IList<Book>>(
 				new BookTitleSubMenuWithListValues(
 					new SubMenuCommand<Book>(
 						new SubMenuWithCommands<Book>("Редактировать книгу",
@@ -83,7 +83,7 @@ public static class Program
 									new EditBookPageCommand("Редактировать страницу"),
 									new DeleteBookPageCommand("Удалить страницу")))))),
 				wrapper => wrapper.Value),
-			new SubMenuCommand<ValueWrapper<IList<Book>>, IList<Book>>(
+			new SubMenuConvertCommand<ValueWrapper<IList<Book>>, IList<Book>>(
 				new SubMenuWithCommands<IList<Book>>("Редактировать книгу 2",
 					new SubMenuCommand<IList<Book>>(
 						new BookTitleSubMenuWithListValues(

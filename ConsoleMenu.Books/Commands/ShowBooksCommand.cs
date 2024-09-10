@@ -12,10 +12,12 @@ namespace ConsoleMenu.Books.Commands;
 public class ShowBooksCommand : ICommand<ValueWrapper<IList<Book>>>
 {
 	public string Description { get; }
+	public bool IsBackAfterExecute { get; }
 
-	public ShowBooksCommand(string description)
+	public ShowBooksCommand(string description, bool isBackAfterExecute = false)
 	{
 		Description = description;
+		IsBackAfterExecute = isBackAfterExecute;
 	}
 
 	public Task ExecuteAsync(ValueWrapper<IList<Book>> wrapper)

@@ -9,16 +9,18 @@ namespace ConsoleMenu.Commands;
 public class AddIntCommand : ICommand<ValueWrapper<int>>
 {
 	public string Description { get; }
+	public bool IsBackAfterExecute { get; }
 
-	public AddIntCommand(string description)
+	public AddIntCommand(string description, bool isBackAfterExecute = false)
 	{
 		Description = description;
+		IsBackAfterExecute = isBackAfterExecute;
 	}
 
 	public Task ExecuteAsync(ValueWrapper<int> wrapper)
 	{
 		Console.Write("Введите число для сложения");
-		var value = ConsoleReadHelper.ReadInt(" => ", int.MinValue, int.MaxValue);
+		var value = ConsoleReadHelper.ReadInt(" => ");
 
 		wrapper.Value += value;
 

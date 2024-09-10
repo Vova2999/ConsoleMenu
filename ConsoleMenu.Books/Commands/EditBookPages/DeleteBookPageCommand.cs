@@ -11,10 +11,12 @@ namespace ConsoleMenu.Books.Commands.EditBookPages;
 public class DeleteBookPageCommand : ICommand<Book>
 {
 	public string Description { get; }
+	public bool IsBackAfterExecute { get; }
 
-	public DeleteBookPageCommand(string description)
+	public DeleteBookPageCommand(string description, bool isBackAfterExecute = false)
 	{
 		Description = description;
+		IsBackAfterExecute = isBackAfterExecute;
 	}
 
 	public Task ExecuteAsync(Book book)

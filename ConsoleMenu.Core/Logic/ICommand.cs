@@ -1,9 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿namespace ConsoleMenu.Core.Logic;
 
-namespace ConsoleMenu.Core.Logic;
-
-public interface ICommand<in TValue>
+public interface ICommand
 {
 	string Description { get; }
-	Task ExecuteAsync(TValue value);
+	bool IsBackAfterExecute { get; }
+	Task ExecuteAsync();
 }

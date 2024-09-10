@@ -3,22 +3,22 @@ using System.Threading.Tasks;
 
 namespace ConsoleMenu.Core.Logic.Commands;
 
-public class SelectCommand<TValue, TSubValue> : ICommand<TValue>
+public class SelectCommand<TSubValue> : ICommand
 {
-	public string Description { get; }
+	public string Description => _command.Description;
+	public bool IsBackAfterExecute => _command.IsBackAfterExecute;
 
 	private readonly ICommand<TSubValue> _command;
-	private readonly Func<TValue, TSubValue> _selector;
+	private readonly Func<TSubValue> _selector;
 
-	public SelectCommand(string description, ICommand<TSubValue> command, Func<TValue, TSubValue> selector)
+	public SelectCommand(ICommand<TSubValue> command, Func<TSubValue> selector)
 	{
-		Description = description;
 		_command = command;
 		_selector = selector;
 	}
 
-	public Task ExecuteAsync(TValue value)
+	public Task ExecuteAsync()
 	{
-		return _command.ExecuteAsync(_selector(value));
+		return _command.ExecuteAsync(_selector());
 	}
 }

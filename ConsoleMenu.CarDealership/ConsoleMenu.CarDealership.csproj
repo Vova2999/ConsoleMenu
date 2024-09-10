@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A90567A1-0D3D-4835-8E77-E571E92004C6}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ConsoleMenu.CarDealership</RootNamespace>
+    <AssemblyName>ConsoleMenu.CarDealership</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\AddCarCommand.cs" />
+    <Compile Include="Commands\DeleteCarCommand.cs" />
+    <Compile Include="Commands\DeleteSelectedCarsCommand.cs" />
+    <Compile Include="Commands\FindCarByCostCommand.cs" />
+    <Compile Include="Commands\FindCarByEngineCapacityCommand.cs" />
+    <Compile Include="Commands\FindCarByMakeYearCommand.cs" />
+    <Compile Include="Commands\FindCarByNameCommand.cs" />
+    <Compile Include="Commands\ShowCarsCommand.cs" />
+    <Compile Include="Commands\ShowSelectedCarsCommand.cs" />
+    <Compile Include="DataBase\CarDb.cs" />
+    <Compile Include="DataBase\ICarDB.cs" />
+    <Compile Include="Entities\Car.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Helpers\PrintHelper.cs" />
+    <Compile Include="Helpers\XmlSerializerHelper.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CarFinder.cs" />
+    <Compile Include="Services\ICarFinder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConsoleMenu.Core\ConsoleMenu.Core.csproj">
+      <Project>{79d512ef-18ad-4cf6-955e-e07510ba7612}</Project>
+      <Name>ConsoleMenu.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

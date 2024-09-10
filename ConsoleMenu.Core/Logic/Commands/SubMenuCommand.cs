@@ -1,20 +1,25 @@
-﻿using System.Threading.Tasks;
+﻿namespace ConsoleMenu.Core.Logic.Commands;
 
-namespace ConsoleMenu.Core.Logic.Commands;
-
-public class SubMenuCommand<TValue> : ICommand<TValue>
+public class SubMenuCommand : ICommand
 {
 	public string Description => _subMenu.Description;
+	public bool IsBackAfterExecute { get; }
 
-	private readonly ISubMenu<TValue> _subMenu;
+	private readonly ISubMenu _subMenu;
 
-	public SubMenuCommand(ISubMenu<TValue> subMenu)
+	public SubMenuCommand(ISubMenu subMenu)
 	{
 		_subMenu = subMenu;
 	}
 
-	public Task ExecuteAsync(TValue value)
+	public SubMenuCommand(bool isBackAfterExecute, ISubMenu subMenu)
 	{
-		return _subMenu.StartAsync(value);
+		IsBackAfterExecute = isBackAfterExecute;
+		_subMenu = subMenu;
+	}
+
+	public Task ExecuteAsync()
+	{
+		return _subMenu.StartAsync();
 	}
 }

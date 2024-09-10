@@ -5,27 +5,37 @@ using ConsoleMenu.Core.Helpers;
 
 namespace ConsoleMenu.Core.Logic.Menus;
 
-public abstract class MenuWithCommands<TValue> : MenuBase<TValue>
+public abstract class MenuWithCommands : MenuBase
 {
-	private readonly ICommand<TValue>[] _commands;
+	private readonly ICommand[] _commands;
 
-	protected MenuWithCommands(params ICommand<TValue>[] commands)
+	protected MenuWithCommands(params ICommand[] commands)
 	{
 		_commands = commands;
 	}
 
-	protected override IEnumerable<string> GetCommandDescriptions(TValue value)
+	protected MenuWithCommands(bool isBackAfterExecute, params ICommand[] commands) : base(isBackAfterExecute)
+	{
+		_commands = commands;
+	}
+
+	protected override IEnumerable<string> GetCommandDescriptions()
 	{
 		return _commands.Select(command => command.Description);
 	}
 
-	protected override int ReadSelector(TValue value)
+	protected override int ReadSelector()
 	{
 		return ConsoleReadHelper.ReadInt(" => ", 0, _commands.Length);
 	}
 
-	protected override Task ExecuteCommandAsync(TValue value, int index)
+	protected override Task ExecuteCommandAsync(int index)
 	{
-		return _commands[index].ExecuteAsync(value);
+		return _commands[index].ExecuteAsync();
+	}
+
+	protected override bool IsBackAfterExecuteCommand(int index)
+	{
+		return _commands[index].IsBackAfterExecute;
 	}
 }
