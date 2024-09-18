@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.CarDealership.DataBase;
 using ConsoleMenu.CarDealership.Entities;
 
@@ -15,23 +16,27 @@ public class CarFinder : ICarFinder
 		this.carDb = carDb;
 	}
 
-	public IEnumerable<Car> FindByName(string name)
+	public async Task<IEnumerable<Car>> FindByNameAsync(string name)
 	{
-		return carDb.Cars.Where(car => string.Equals(car.Name, name, StringComparison.OrdinalIgnoreCase));
+		var cars = await carDb.GetAllAsync().ConfigureAwait(false);
+		return cars.Where(car => string.Equals(car.Name, name, StringComparison.OrdinalIgnoreCase));
 	}
 
-	public IEnumerable<Car> FindByMakeYear(int makeYear)
+	public async Task<IEnumerable<Car>> FindByMakeYearAsync(int makeYear)
 	{
-		return carDb.Cars.Where(car => car.MakeYear == makeYear);
+		var cars = await carDb.GetAllAsync().ConfigureAwait(false);
+		return cars.Where(car => car.MakeYear == makeYear);
 	}
 
-	public IEnumerable<Car> FindByEngineCapacity(double engineCapacity)
+	public async Task<IEnumerable<Car>> FindByEngineCapacityAsync(double engineCapacity)
 	{
-		return carDb.Cars.Where(car => car.EngineCapacity == engineCapacity);
+		var cars = await carDb.GetAllAsync().ConfigureAwait(false);
+		return cars.Where(car => car.EngineCapacity == engineCapacity);
 	}
 
-	public IEnumerable<Car> FindByCost(double cost)
+	public async Task<IEnumerable<Car>> FindByCostAsync(double cost)
 	{
-		return carDb.Cars.Where(car => car.Cost == cost);
+		var cars = await carDb.GetAllAsync().ConfigureAwait(false);
+		return cars.Where(car => car.Cost == cost);
 	}
 }

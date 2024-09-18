@@ -22,17 +22,16 @@ public class FindCarByCostCommand : ICommand
 		IsBackAfterExecute = isBackAfterExecute;
 	}
 
-	public Task ExecuteAsync()
+	public async Task ExecuteAsync()
 	{
 		Console.WriteLine("Введите стоимость: ");
 		var cost = double.Parse(Console.ReadLine()!);
 
 		Console.WriteLine();
 		Console.WriteLine("Найденные машины:");
-		_carFinder.FindByCost(cost).Select(car => $"Id: {car.Id}, Имя: {car.Name}").ForEach(Console.WriteLine);
+		var cars = await _carFinder.FindByCostAsync(cost).ConfigureAwait(false);
+		cars.Select(car => $"Id: {car.Id}, Имя: {car.Name}").ForEach(Console.WriteLine);
 
 		PrintHelper.ReadKeyForContinue();
-
-		return Task.CompletedTask;
 	}
 }

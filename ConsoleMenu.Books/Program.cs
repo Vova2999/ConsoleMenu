@@ -70,7 +70,7 @@ public static class Program
 			new SubMenuConvertCommand<ValueWrapper<IList<Book>>, IList<Book>>(
 				new BookTitleSubMenuWithListValues(
 					new ShowBookCommand("Показать книгу")),
-				wrapper => wrapper.Value),
+				wrapper => Task.FromResult(wrapper.Value)),
 			new AddBookCommand("Добавить книгу"),
 			new DeleteBookCommand("Удалить книгу"),
 			new SubMenuConvertCommand<ValueWrapper<IList<Book>>, IList<Book>>(
@@ -84,7 +84,7 @@ public static class Program
 									new AddBookPageCommand("Добавить страницу"),
 									new EditBookPageCommand("Редактировать страницу"),
 									new DeleteBookPageCommand("Удалить страницу")))))),
-				wrapper => wrapper.Value),
+				wrapper => Task.FromResult(wrapper.Value)),
 			new SubMenuConvertCommand<ValueWrapper<IList<Book>>, IList<Book>>(
 				new SubMenuWithCommands<IList<Book>>("Редактировать книгу 2",
 					new SubMenuCommand<IList<Book>>(
@@ -100,6 +100,6 @@ public static class Program
 									new AddBookPageCommand("Добавить страницу"),
 									new EditBookPageCommand("Редактировать страницу"),
 									new DeleteBookPageCommand("Удалить страницу")))))),
-				wrapper => wrapper.Value));
+				wrapper => Task.FromResult(wrapper.Value)));
 	}
 }

@@ -34,7 +34,7 @@ public class AddCarCommand : ICommand
 		Console.Write("Введите стоимость: ");
 		var cost = double.Parse(Console.ReadLine()!);
 
-		_carDb.Add(new Car
+		_carDb.AddAsync(new Car
 		{
 			Name = name,
 			MakeYear = makeYear,

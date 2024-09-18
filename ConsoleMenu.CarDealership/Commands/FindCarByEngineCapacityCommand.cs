@@ -22,17 +22,16 @@ public class FindCarByEngineCapacityCommand : ICommand
 		IsBackAfterExecute = isBackAfterExecute;
 	}
 
-	public Task ExecuteAsync()
+	public async Task ExecuteAsync()
 	{
 		Console.WriteLine("Введите мощность двигателя: ");
 		var engineCapacity = double.Parse(Console.ReadLine()!);
 
 		Console.WriteLine();
 		Console.WriteLine("Найденные машины:");
-		_carFinder.FindByEngineCapacity(engineCapacity).Select(car => $"Id: {car.Id}, Имя: {car.Name}").ForEach(Console.WriteLine);
+		var cars = await _carFinder.FindByEngineCapacityAsync(engineCapacity).ConfigureAwait(false);
+		cars.Select(car => $"Id: {car.Id}, Имя: {car.Name}").ForEach(Console.WriteLine);
 
 		PrintHelper.ReadKeyForContinue();
-
-		return Task.CompletedTask;
 	}
 }

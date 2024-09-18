@@ -22,14 +22,12 @@ public class ShowCarsCommand : ICommand
 		IsBackAfterExecute = isBackAfterExecute;
 	}
 
-	public Task ExecuteAsync()
+	public async Task ExecuteAsync()
 	{
-		_carDb.Cars
+		(await _carDb.GetAllAsync().ConfigureAwait(false))
 			.Select(car => $"Id: {car.Id}, Имя: {car.Name}, Год выпуска: {car.MakeYear}, Мощность двигателя: {car.EngineCapacity}, Стоимость: {car.Cost}")
 			.ForEach(Console.WriteLine);
 
 		PrintHelper.ReadKeyForContinue();
-
-		return Task.CompletedTask;
 	}
 }

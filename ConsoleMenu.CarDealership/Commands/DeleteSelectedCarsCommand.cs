@@ -22,10 +22,9 @@ public class DeleteSelectedCarsCommand : ICommand<IEnumerable<Car>>
 		Description = description;
 	}
 
-	public Task ExecuteAsync(IEnumerable<Car> value)
+	public async Task ExecuteAsync(IEnumerable<Car> value)
 	{
-		value.ToArray().ForEach(_carDb.Delete);
-
-		return Task.CompletedTask;
+		foreach (var car in value.ToArray())
+			await _carDb.DeleteAsync(car).ConfigureAwait(false);
 	}
 }

@@ -22,17 +22,16 @@ public class FindCarByMakeYearCommand : ICommand
 		IsBackAfterExecute = isBackAfterExecute;
 	}
 
-	public Task ExecuteAsync()
+	public async Task ExecuteAsync()
 	{
 		Console.WriteLine("Введите год выпуска: ");
 		var makeYear = int.Parse(Console.ReadLine()!);
 
 		Console.WriteLine();
 		Console.WriteLine("Найденные машины:");
-		_carFinder.FindByMakeYear(makeYear).Select(car => $"Id: {car.Id}, Имя: {car.Name}").ForEach(Console.WriteLine);
+		var cars = await _carFinder.FindByMakeYearAsync(makeYear).ConfigureAwait(false);
+		cars.Select(car => $"Id: {car.Id}, Имя: {car.Name}").ForEach(Console.WriteLine);
 
 		PrintHelper.ReadKeyForContinue();
-
-		return Task.CompletedTask;
 	}
 }

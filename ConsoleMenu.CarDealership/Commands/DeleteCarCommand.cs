@@ -21,7 +21,7 @@ public class DeleteCarCommand : ICommand<Car>
 
 	public Task ExecuteAsync(Car car)
 	{
-		_carDb.Delete(car);
+		_carDb.DeleteAsync(car);
 
 		return Task.CompletedTask;
 	}

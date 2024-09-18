@@ -9,23 +9,24 @@ public class SubMenuConvertCommand<TSubValue> : ICommand
 	public bool IsBackAfterExecute { get; }
 
 	private readonly ISubMenu<TSubValue> _subMenu;
-	private readonly Func<TSubValue> _selector;
+	private readonly Func<Task<TSubValue>> _selector;
 
-	public SubMenuConvertCommand(ISubMenu<TSubValue> subMenu, Func<TSubValue> selector)
+	public SubMenuConvertCommand(ISubMenu<TSubValue> subMenu, Func<Task<TSubValue>> selector)
 	{
 		_subMenu = subMenu;
 		_selector = selector;
 	}
 
-	public SubMenuConvertCommand(bool isBackAfterExecute, ISubMenu<TSubValue> subMenu, Func<TSubValue> selector)
+	public SubMenuConvertCommand(bool isBackAfterExecute, ISubMenu<TSubValue> subMenu, Func<Task<TSubValue>> selector)
 	{
 		IsBackAfterExecute = isBackAfterExecute;
 		_subMenu = subMenu;
 		_selector = selector;
 	}
 
-	public Task ExecuteAsync()
+	public async Task ExecuteAsync()
 	{
-		return _subMenu.StartAsync(_selector());
+		var subValue = await _selector().ConfigureAwait(false);
+		await _subMenu.StartAsync(subValue).ConfigureAwait(false);
 	}
 }

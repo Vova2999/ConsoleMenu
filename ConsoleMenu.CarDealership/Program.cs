@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using ConsoleMenu.CarDealership.Commands;
 using ConsoleMenu.CarDealership.DataBase;
 using ConsoleMenu.CarDealership.Entities;
-using ConsoleMenu.CarDealership.Extensions;
 using ConsoleMenu.CarDealership.Helpers;
 using ConsoleMenu.CarDealership.Services;
 using ConsoleMenu.Core.Logic;
@@ -38,11 +37,12 @@ public static class Program
 
 	private static async Task ReadCarsAndStartMenuAsync(ICarDb carDb, ICarFinder carFinder)
 	{
-		ReadCars().ForEach(carDb.Add);
+		foreach (var car in ReadCars())
+			await carDb.AddAsync(car).ConfigureAwait(false);
 
 		await CreateMenu(carDb, carFinder).StartAsync().ConfigureAwait(false);
 
-		WriteCars(carDb.Cars);
+		WriteCars(await carDb.GetAllAsync().ConfigureAwait(false));
 	}
 
 	private static IEnumerable<Car> ReadCars()
@@ -75,7 +75,7 @@ public static class Program
 					true,
 					new DeleteCarCommand("Удалить машину", carDb),
 					car => car.Name),
-				() => carDb.Cars
+				carDb.GetAllAsync
 			),
 			new FindCarByNameCommand("Поиск по имени", carFinder),
 			new FindCarByMakeYearCommand("Поиск по году выпуска", carFinder),
@@ -85,10 +85,17 @@ public static class Program
 				new SubMenuWithListValues<int>(
 					new SelectCommand<int, IEnumerable<Car>>(
 						new ShowSelectedCarsCommand("Показать машины по году выпуска"),
-						makeYear => carDb.Cars.Where(c => c.MakeYear == makeYear)),
+						async makeYear =>
+						{
+							var cars = await carDb.GetAllAsync().ConfigureAwait(false);
+							return cars.Where(c => c.MakeYear == makeYear);
+						}),
 					makeYear => makeYear.ToString()),
-				() => carDb.Cars.Select(c => c.MakeYear).Distinct().OrderBy(x => x)
-			),
+				async () =>
+				{
+					var cars = await carDb.GetAllAsync().ConfigureAwait(false);
+					return cars.Select(c => c.MakeYear).Distinct().OrderBy(x => x);
+				}),
 			new SubMenuConvertCommand<IEnumerable<int>>(
 				new SubMenuWithListValues<int>(
 					new SubMenuConvertCommand<int, IEnumerable<Car>>(
@@ -97,9 +104,16 @@ public static class Program
 							cars => $"Редактирование машин с годом выпуска {cars.First().MakeYear}",
 							new ShowSelectedCarsCommand("Показать машины"),
 							new DeleteSelectedCarsCommand("Удалить машины", carDb, true)),
-						makeYear => carDb.Cars.Where(c => c.MakeYear == makeYear)),
+						async makeYear =>
+						{
+							var cars = await carDb.GetAllAsync().ConfigureAwait(false);
+							return cars.Where(c => c.MakeYear == makeYear);
+						}),
 					makeYear => makeYear.ToString()),
-				() => carDb.Cars.Select(c => c.MakeYear).Distinct().OrderBy(x => x)
-			));
+				async () =>
+				{
+					var cars = await carDb.GetAllAsync().ConfigureAwait(false);
+					return cars.Select(c => c.MakeYear).Distinct().OrderBy(x => x);
+				}));
 	}
 }

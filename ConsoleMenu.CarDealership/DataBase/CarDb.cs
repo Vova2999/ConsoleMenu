@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using ConsoleMenu.CarDealership.Entities;
 
 namespace ConsoleMenu.CarDealership.DataBase;
@@ -8,22 +8,26 @@ public class CarDb : ICarDb
 {
 	private readonly List<Car> _cars = new();
 
-	public IReadOnlyList<Car> Cars => _cars.AsReadOnly();
-
-	public void Add(Car car)
+	public Task<IReadOnlyList<Car>> GetAllAsync()
 	{
-		car.Id = _cars.Any() ? _cars.Max(c => c.Id) + 1 : 1;
-
-		_cars.Add(car);
+		return Task.FromResult((IReadOnlyList<Car>) _cars.AsReadOnly());
 	}
 
-	public void Delete(Car car)
+	public Task AddAsync(Car car)
+	{
+		_cars.Add(car);
+		return Task.CompletedTask;
+	}
+
+	public Task DeleteAsync(Car car)
 	{
 		_cars.Remove(car);
+		return Task.CompletedTask;
 	}
 
-	public void Clear()
+	public Task ClearAsync()
 	{
 		_cars.Clear();
+		return Task.CompletedTask;
 	}
 }

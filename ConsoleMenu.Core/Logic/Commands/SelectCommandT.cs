@@ -9,16 +9,17 @@ public class SelectCommand<TValue, TSubValue> : ICommand<TValue>
 	public bool IsBackAfterExecute => _command.IsBackAfterExecute;
 
 	private readonly ICommand<TSubValue> _command;
-	private readonly Func<TValue, TSubValue> _selector;
+	private readonly Func<TValue, Task<TSubValue>> _selector;
 
-	public SelectCommand(ICommand<TSubValue> command, Func<TValue, TSubValue> selector)
+	public SelectCommand(ICommand<TSubValue> command, Func<TValue, Task<TSubValue>> selector)
 	{
 		_command = command;
 		_selector = selector;
 	}
 
-	public Task ExecuteAsync(TValue value)
+	public async Task ExecuteAsync(TValue value)
 	{
-		return _command.ExecuteAsync(_selector(value));
+		var subValue = await _selector(value).ConfigureAwait(false);
+		await _command.ExecuteAsync(subValue).ConfigureAwait(false);
 	}
 }

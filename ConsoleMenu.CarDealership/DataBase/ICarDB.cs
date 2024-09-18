@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ConsoleMenu.CarDealership.Entities;
 
 namespace ConsoleMenu.CarDealership.DataBase;
 
 public interface ICarDb
 {
-	IReadOnlyList<Car> Cars { get; }
+	Task<IReadOnlyList<Car>> GetAllAsync();
 
-	void Add(Car car);
-	void Delete(Car car);
-	void Clear();
+	Task AddAsync(Car car);
+	Task DeleteAsync(Car car);
+	Task ClearAsync();
 }
