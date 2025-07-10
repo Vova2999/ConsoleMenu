@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using ConsoleMenu.Books.Entities;
+﻿using ConsoleMenu.Books.Entities;
 using ConsoleMenu.Books.Helpers;
 using ConsoleMenu.Core.Helpers;
 using ConsoleMenu.Core.Logic;

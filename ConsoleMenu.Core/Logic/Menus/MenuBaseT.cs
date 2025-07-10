@@ -1,52 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ConsoleMenu.Core.Extensions;
+﻿using ConsoleMenu.Core.Helpers;
 
 namespace ConsoleMenu.Core.Logic.Menus;
 
 public abstract class MenuBase<TValue>
 {
-	private readonly bool _isBackAfterExecute;
+    private readonly bool _isBackAfterExecute;
 
-	protected abstract string BackCommandDescription { get; }
+    protected abstract string BackCommandDescription { get; }
 
-	protected MenuBase(bool isBackAfterExecute = false)
-	{
-		_isBackAfterExecute = isBackAfterExecute;
-	}
+    protected MenuBase(bool isBackAfterExecute = false)
+    {
+        _isBackAfterExecute = isBackAfterExecute;
+    }
 
-	public async Task StartAsync(TValue value)
-	{
-		while (true)
-		{
-			Console.Clear();
-			PrintCommands(value);
+    public async Task StartAsync(TValue value)
+    {
+        var selector = 0;
 
-			var selector = ReadSelector(value);
-			if (selector == 0)
-				break;
+        while (true)
+        {
+            var header = GetHeader(value);
+            var commandLines = GetCommandDescriptions(value).Append(BackCommandDescription).ToArray();
 
-			await ExecuteCommandAsync(value, selector - 1).ConfigureAwait(false);
-			if (_isBackAfterExecute || IsBackAfterExecuteCommand(selector - 1))
-				break;
-		}
-	}
+            ConsoleBorderedMenuHelper.PrintMenuAndGetSelector(ref selector, header, commandLines);
+            if (selector == commandLines.Length - 1)
+                break;
 
-	protected virtual void PrintCommands(TValue value)
-	{
-		GetCommandDescriptions(value)
-			.Select((description, i) => $"{i + 1}: {description}")
-			.Concat($"0: {BackCommandDescription}".AsEnumerable())
-			.ForEach(Console.WriteLine);
-	}
+            await ExecuteCommandAsync(value, selector).ConfigureAwait(false);
+            if (_isBackAfterExecute || IsBackAfterExecuteCommand(selector))
+                break;
+        }
+    }
 
-	protected abstract IEnumerable<string> GetCommandDescriptions(TValue value);
+    protected virtual string? GetHeader(TValue value)
+    {
+        return null;
+    }
 
-	protected abstract int ReadSelector(TValue value);
+    protected abstract IEnumerable<string> GetCommandDescriptions(TValue value);
 
-	protected abstract Task ExecuteCommandAsync(TValue value, int index);
+    protected abstract Task ExecuteCommandAsync(TValue value, int index);
 
-	protected abstract bool IsBackAfterExecuteCommand(int index);
+    protected abstract bool IsBackAfterExecuteCommand(int index);
 }

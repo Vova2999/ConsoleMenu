@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using ConsoleMenu.CarDealership.DataBase;
+﻿using ConsoleMenu.CarDealership.DataBase;
 using ConsoleMenu.CarDealership.Entities;
 using ConsoleMenu.Core.Logic;
 

@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace ConsoleMenu.Core.Logic;
+﻿namespace ConsoleMenu.Core.Logic;
 
 public interface IMenu
 {

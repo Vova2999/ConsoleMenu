@@ -2,5 +2,5 @@
 
 public interface ISubMenu<in TValue> : IMenu<TValue>
 {
-	string Description { get; }
+	string? Description { get; }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using ConsoleMenu.Books.Entities;
+﻿using ConsoleMenu.Books.Entities;
 using ConsoleMenu.Core.Logic;
 
 namespace ConsoleMenu.Books.Commands.EditBookProperties;

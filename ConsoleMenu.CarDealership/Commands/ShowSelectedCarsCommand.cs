@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ConsoleMenu.CarDealership.Entities;
 using ConsoleMenu.CarDealership.Extensions;
 using ConsoleMenu.CarDealership.Helpers;

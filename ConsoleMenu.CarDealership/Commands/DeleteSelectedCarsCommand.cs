@@ -1,9 +1,5 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ConsoleMenu.CarDealership.DataBase;
 using ConsoleMenu.CarDealership.Entities;
-using ConsoleMenu.CarDealership.Extensions;
 using ConsoleMenu.Core.Logic;
 
 namespace ConsoleMenu.CarDealership.Commands;

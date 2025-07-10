@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using ConsoleMenu.Commands;
+﻿using ConsoleMenu.Commands;
 using ConsoleMenu.Core;
 using ConsoleMenu.Core.Logic.Commands;
 using ConsoleMenu.Core.Logic.Menus.WithCommands;

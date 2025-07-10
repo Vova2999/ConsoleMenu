@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using ConsoleMenu.CarDealership.Extensions;
+﻿using ConsoleMenu.CarDealership.Extensions;
 using ConsoleMenu.CarDealership.Helpers;
 using ConsoleMenu.CarDealership.Services;
 using ConsoleMenu.Core.Logic;

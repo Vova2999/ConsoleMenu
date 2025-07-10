@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using ConsoleMenu.Core.Helpers;
+﻿using ConsoleMenu.Core.Helpers;
 
 namespace ConsoleMenu.CarDealership.Helpers;
 

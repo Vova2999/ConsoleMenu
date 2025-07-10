@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using ConsoleMenu.CarDealership.Entities;
+﻿using ConsoleMenu.CarDealership.Entities;
 
 namespace ConsoleMenu.CarDealership.DataBase;
 

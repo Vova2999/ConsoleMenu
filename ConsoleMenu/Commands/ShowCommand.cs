@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using ConsoleMenu.Core;
+﻿using ConsoleMenu.Core;
 using ConsoleMenu.Core.Logic;
 
 namespace ConsoleMenu.Commands;

@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using ConsoleMenu.CarDealership.Commands;
+﻿using ConsoleMenu.CarDealership.Commands;
 using ConsoleMenu.CarDealership.DataBase;
 using ConsoleMenu.CarDealership.Entities;
 using ConsoleMenu.CarDealership.Helpers;
 using ConsoleMenu.CarDealership.Services;
 using ConsoleMenu.Core.Logic;
-using ConsoleMenu.Core.Logic.Commands;
 using ConsoleMenu.Core.Logic.Menus.WithCommands;
-using ConsoleMenu.Core.Logic.Menus.WithListValues;
 
 namespace ConsoleMenu.CarDealership;
 

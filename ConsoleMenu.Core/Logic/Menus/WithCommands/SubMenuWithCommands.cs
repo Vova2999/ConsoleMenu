@@ -1,13 +1,11 @@
-﻿using System;
-
-namespace ConsoleMenu.Core.Logic.Menus.WithCommands;
+﻿namespace ConsoleMenu.Core.Logic.Menus.WithCommands;
 
 public class SubMenuWithCommands : MenuWithCommands, ISubMenu
 {
 	protected override string BackCommandDescription => "Назад";
 
-	public string Description { get; }
-	public Func<string> GetDescription { get; }
+	public string? Description { get; }
+	public Func<string>? GetDescription { get; }
 
 	public SubMenuWithCommands(string description, params ICommand[] commands) : base(commands)
 	{
@@ -41,9 +39,8 @@ public class SubMenuWithCommands : MenuWithCommands, ISubMenu
 		GetDescription = getDescription;
 	}
 
-	protected override void PrintCommands()
-	{
-		Console.WriteLine($"<{GetDescription?.Invoke() ?? Description}>");
-		base.PrintCommands();
-	}
+    protected override string? GetHeader()
+    {
+        return GetDescription?.Invoke() ?? Description;
+    }
 }

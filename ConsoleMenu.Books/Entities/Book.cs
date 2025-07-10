@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ConsoleMenu.Books.Entities;
+﻿namespace ConsoleMenu.Books.Entities;
 
 public class Book
 {

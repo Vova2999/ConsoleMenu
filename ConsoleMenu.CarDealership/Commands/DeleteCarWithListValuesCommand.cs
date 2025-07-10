@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ConsoleMenu.CarDealership.DataBase;
+﻿using ConsoleMenu.CarDealership.DataBase;
 using ConsoleMenu.CarDealership.Entities;
 using ConsoleMenu.Core.Logic.Commands;
 using ConsoleMenu.Core.Logic.Menus.WithListValues;

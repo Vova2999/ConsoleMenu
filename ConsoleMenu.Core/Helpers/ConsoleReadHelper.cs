@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ConsoleMenu.Core.Helpers;
+﻿namespace ConsoleMenu.Core.Helpers;
 
 public static class ConsoleReadHelper
 {

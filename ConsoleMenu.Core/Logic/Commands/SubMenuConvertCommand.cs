@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace ConsoleMenu.Core.Logic.Commands;
+﻿namespace ConsoleMenu.Core.Logic.Commands;
 
 public class SubMenuConvertCommand<TSubValue> : ICommand
 {

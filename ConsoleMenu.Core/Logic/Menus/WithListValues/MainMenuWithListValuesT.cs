@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ConsoleMenu.Core.Logic.Menus.WithListValues;
+﻿namespace ConsoleMenu.Core.Logic.Menus.WithListValues;
 
 public class MainMenuWithListValues<TValue> : MenuWithListValues<TValue>, IMenu<IEnumerable<TValue>>
 {

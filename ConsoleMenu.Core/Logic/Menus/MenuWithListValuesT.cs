@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ConsoleMenu.Core.Helpers;
-
-namespace ConsoleMenu.Core.Logic.Menus;
+﻿namespace ConsoleMenu.Core.Logic.Menus;
 
 public abstract class MenuWithListValues<TValue> : MenuBase<IEnumerable<TValue>>
 {
@@ -26,11 +20,6 @@ public abstract class MenuWithListValues<TValue> : MenuBase<IEnumerable<TValue>>
 	protected override IEnumerable<string> GetCommandDescriptions(IEnumerable<TValue> values)
 	{
 		return values.Select(_getValueDescription);
-	}
-
-	protected override int ReadSelector(IEnumerable<TValue> values)
-	{
-		return ConsoleReadHelper.ReadInt(" => ", 0, values.Count());
 	}
 
 	protected override Task ExecuteCommandAsync(IEnumerable<TValue> values, int index)

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using ConsoleMenu.Books.Commands;
+﻿using ConsoleMenu.Books.Commands;
 using ConsoleMenu.Books.Commands.EditBookPages;
 using ConsoleMenu.Books.Commands.EditBookProperties;
 using ConsoleMenu.Books.Entities;

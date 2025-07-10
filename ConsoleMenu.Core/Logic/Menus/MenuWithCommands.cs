@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ConsoleMenu.Core.Helpers;
-
-namespace ConsoleMenu.Core.Logic.Menus;
+﻿namespace ConsoleMenu.Core.Logic.Menus;
 
 public abstract class MenuWithCommands : MenuBase
 {
@@ -22,11 +17,6 @@ public abstract class MenuWithCommands : MenuBase
 	protected override IEnumerable<string> GetCommandDescriptions()
 	{
 		return _commands.Select(command => command.Description);
-	}
-
-	protected override int ReadSelector()
-	{
-		return ConsoleReadHelper.ReadInt(" => ", 0, _commands.Length);
 	}
 
 	protected override Task ExecuteCommandAsync(int index)

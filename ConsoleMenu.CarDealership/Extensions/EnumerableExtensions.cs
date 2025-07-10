@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ConsoleMenu.CarDealership.Extensions;
+﻿namespace ConsoleMenu.CarDealership.Extensions;
 
 public static class EnumerableExtensions
 {
