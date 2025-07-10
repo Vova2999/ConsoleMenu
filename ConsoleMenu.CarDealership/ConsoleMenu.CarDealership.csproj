@@ -43,10 +43,13 @@
   <ItemGroup>
     <Compile Include="Commands\AddCarCommand.cs" />
     <Compile Include="Commands\DeleteCarCommand.cs" />
+    <Compile Include="Commands\DeleteCarWithListValuesCommand.cs" />
     <Compile Include="Commands\DeleteSelectedCarsCommand.cs" />
+    <Compile Include="Commands\EditCarsByMakeYearWithCommandsCommand.cs" />
     <Compile Include="Commands\FindCarByCostCommand.cs" />
     <Compile Include="Commands\FindCarByEngineCapacityCommand.cs" />
     <Compile Include="Commands\FindCarByMakeYearCommand.cs" />
+    <Compile Include="Commands\FindCarByMakeYearWithListYearsCommand.cs" />
     <Compile Include="Commands\FindCarByNameCommand.cs" />
     <Compile Include="Commands\ShowCarsCommand.cs" />
     <Compile Include="Commands\ShowSelectedCarsCommand.cs" />

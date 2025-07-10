@@ -7,22 +7,22 @@ namespace ConsoleMenu.CarDealership.Commands;
 
 public class DeleteCarCommand : ICommand<Car>
 {
-	private readonly ICarDb _carDb;
+    private readonly ICarDb _carDb;
 
-	public string Description { get; }
-	public bool IsBackAfterExecute { get; }
+    public string Description { get; }
+    public bool IsBackAfterExecute { get; }
 
-	public DeleteCarCommand(string description, ICarDb carDb, bool isBackAfterExecute = false)
-	{
-		Description = description;
-		_carDb = carDb;
-		IsBackAfterExecute = isBackAfterExecute;
-	}
+    public DeleteCarCommand(string description, ICarDb carDb, bool isBackAfterExecute = false)
+    {
+        Description = description;
+        _carDb = carDb;
+        IsBackAfterExecute = isBackAfterExecute;
+    }
 
-	public Task ExecuteAsync(Car car)
-	{
-		_carDb.DeleteAsync(car);
+    public Task ExecuteAsync(Car car)
+    {
+        _carDb.DeleteAsync(car);
 
-		return Task.CompletedTask;
-	}
+        return Task.CompletedTask;
+    }
 }

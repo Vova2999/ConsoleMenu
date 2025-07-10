@@ -10,28 +10,28 @@ namespace ConsoleMenu.CarDealership.Commands;
 
 public class FindCarByMakeYearCommand : ICommand
 {
-	private readonly ICarFinder _carFinder;
+    private readonly ICarFinder _carFinder;
 
-	public string Description { get; }
-	public bool IsBackAfterExecute { get; }
+    public string Description { get; }
+    public bool IsBackAfterExecute { get; }
 
-	public FindCarByMakeYearCommand(string description, ICarFinder carFinder, bool isBackAfterExecute = false)
-	{
-		Description = description;
-		_carFinder = carFinder;
-		IsBackAfterExecute = isBackAfterExecute;
-	}
+    public FindCarByMakeYearCommand(string description, ICarFinder carFinder, bool isBackAfterExecute = false)
+    {
+        Description = description;
+        _carFinder = carFinder;
+        IsBackAfterExecute = isBackAfterExecute;
+    }
 
-	public async Task ExecuteAsync()
-	{
-		Console.WriteLine("Введите год выпуска: ");
-		var makeYear = int.Parse(Console.ReadLine()!);
+    public async Task ExecuteAsync()
+    {
+        Console.WriteLine("Введите год выпуска: ");
+        var makeYear = int.Parse(Console.ReadLine()!);
 
-		Console.WriteLine();
-		Console.WriteLine("Найденные машины:");
-		var cars = await _carFinder.FindByMakeYearAsync(makeYear).ConfigureAwait(false);
-		cars.Select(car => $"Id: {car.Id}, Имя: {car.Name}").ForEach(Console.WriteLine);
+        Console.WriteLine();
+        Console.WriteLine("Найденные машины:");
+        var cars = await _carFinder.FindByMakeYearAsync(makeYear).ConfigureAwait(false);
+        cars.Select(car => $"Id: {car.Id}, Имя: {car.Name}").ForEach(Console.WriteLine);
 
-		PrintHelper.ReadKeyForContinue();
-	}
+        PrintHelper.ReadKeyForContinue();
+    }
 }
